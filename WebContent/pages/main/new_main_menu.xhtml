@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+ 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<ui:composition>
+
+		<h:form>
+						<h:outputScript library="js" name="interface.js" />			
+			<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#dock').Fisheye( {
+		maxWidth : 33,
+		items : 'a',
+		itemsText : 'span',
+		container : '.dock-container',
+		itemWidth : 32,
+		proximity : 30,
+		halign : 'center'
+	})
+
+});
+</script>
+
+			<div class="a">
+				<div class="indicator_container" id="indicatorContainer"
+					style="height: 55px; margin: 0 auto; position: relative; width: 200px;">
+					<div
+						style="margin-top: 5px; position: absolute; z-index: 11; margin-left: 35px;">
+						<ul class="main_menu_ul">
+							<div class="dock" id="dock">
+								<div style="width: 240px;" class="dock-container">
+									<p:commandLink ajax="true"
+										  update="@form:@parent:mainForm:mainPanelGrid"
+										action="#{mainBB.changeMemuTab}" styleClass="dock-item">
+										<h:graphicImage
+											value="#{resource['images:funcIcon/webapp_welcome.gif']}"></h:graphicImage>
+										<span
+											style="display: none; padding-left: 0px; white-space: nowrap; color: rgb(255, 255, 255); font-weight: bold; background-color: rgb(15, 108, 224);">返回首页</span>
+										<f:setPropertyActionListener target="#{mainBB.seleteTab}"
+											value="firstTab" />
+										<f:setPropertyActionListener
+											target="#{mainBB.mainContentPage}"
+											value="/pages/main/new_main_home.xhtml" />
+
+										<f:setPropertyActionListener
+											target="#{mainBB.mainOnePanelGroup}" value="true" />
+										<f:setPropertyActionListener
+											target="#{mainBB.mainTowPanelGroup}" value="false" />
+										<f:setPropertyActionListener
+											target="#{mainBB.currentModuleBO}" value="#{s}" />
+									</p:commandLink>
+
+									<c:forEach items="#{mainBB.moduleList}"  var="s">
+										<p:commandLink ajax="true"
+										    update="@form:@parent:mainForm:mainPanelGrid"
+											action="#{mainBB.changeMemuTab}" 
+											styleClass="dock-item" >
+											<h:graphicImage value="#{resource[s.iconUrlBig]}"></h:graphicImage>
+											<span
+												style="display: none; padding-left: 0px; white-space: nowrap; color: rgb(255, 255, 255); font-weight: bold; background-color: rgb(15, 108, 224); width: auto;">#{s.moduleName}</span>
+											<f:setPropertyActionListener
+												target="#{mainBB.currentModuleBO}" value="#{s}" />
+											<f:setPropertyActionListener
+												target="#{mainBB.mainContentPage}"
+												value="/pages/main/new_main_home.xhtml" />
+												
+											<f:setPropertyActionListener
+												target="#{mainBB.mainOnePanelGroup}" value="false" />
+											<f:setPropertyActionListener
+												target="#{mainBB.mainTowPanelGroup}" value="true" />
+												
+											<f:setPropertyActionListener target="#{mainBB.seleteTab}"
+											value="firstTab" />
+											<f:setPropertyActionListener
+											target="#{mainBB.mainContentPage}"
+											value="/pages/main/new_main_home.xhtml" />
+										</p:commandLink>
+									</c:forEach>
+									
+									<p:commandLink action="#{mainBB.logout}"   styleClass="dock-item" >
+									<h:graphicImage
+										value="#{resource['images:logout.png']}"
+										title="登出系统"  />
+									<span style="display: none; padding-left: 0px; white-space: nowrap; color: rgb(255, 255, 255); font-weight: bold; background-color: rgb(15, 108, 224); width: auto;">登出系统</span>
+								</p:commandLink>
+								</div>
+							</div>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+	
+		</h:form>
+
+	</ui:composition>
+
+	<style>
+.selected {
+	background-color: #F00;
+}
+</style> 
+		
+
+</html>

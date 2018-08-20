@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+			<h:panelGrid columns="6">
+
+				<h:outputLabel value="编码:" />
+				<p:inputText id="code" value="#{dataDicBB.param.dataClassCode}" />
+				<h:outputLabel value="名称:" />
+				<p:inputText id="name" value="#{dataDicBB.param.dataClassName}" />
+				<h:outputLabel value="编码规则:" />
+				<p:selectOneMenu value="#{dataDicBB.param.dataCodeType}"
+					style="width:160px">
+					<f:selectItem itemLabel="请选择" itemValue="-1" />
+					<f:selectItems value="#{dataDicBB.dataCodeTypeList}" />
+				</p:selectOneMenu>
+
+				<f:facet name="footer">
+					<p:commandButton value="保存" action="#{dataDicBB.findByPager}"
+						rendered="#{dataDicBB.queryable}" update="dataTabledatadic"
+						process="datadicPanel" />
+					<p:commandButton id="adddatadic" value="取消"
+						action="#{dataDicBB.add}" update="datadicdtlDialog"
+						oncomplete="PF('datadicdtlDialog').show();"
+						rendered="#{dataDicBB.addable}" />
+
+				</f:facet>
+			</h:panelGrid>
+	</h:form>
+</html>
+

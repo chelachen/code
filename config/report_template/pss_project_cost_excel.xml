@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE documents [
+<!ELEMENT documents (document+)>
+<!ELEMENT document (style-sheet)>
+<!ATTLIST document id ID #REQUIRED>
+<!ELEMENT style-sheet (title?, page-header?, body-content,page-footer?)>
+<!ATTLIST style-sheet name CDATA #REQUIRED
+					  single (true|false) "true"
+					  sheetSize CDATA #IMPLIED
+					  reorder (true|false) "true"
+					  showGrid (true|false) "true"
+					  readOnly (true|false) "true">
+<!ELEMENT title (field*)>
+<!ATTLIST title name CDATA #REQUIRED
+				rowIndex CDATA #REQUIRED
+				colIndex CDATA #REQUIRED
+				rowspan CDATA #IMPLIED
+				colspan CDATA #IMPLIED
+				fontName CDATA #IMPLIED
+				fontSize CDATA #IMPLIED
+				bold CDATA #IMPLIED
+				italic CDATA #IMPLIED
+				fontColor CDATA #IMPLIED
+				bgColor CDATA #IMPLIED
+				align CDATA #IMPLIED
+				valign CDATA #IMPLIED
+				border CDATA #IMPLIED
+				borderLine CDATA #IMPLIED>
+<!ELEMENT field EMPTY>
+<!ATTLIST field value CDATA #IMPLIED
+				disable CDATA #IMPLIED
+				rowIndex CDATA #IMPLIED
+				colIndex CDATA #REQUIRED
+				rowspan CDATA #IMPLIED
+				colspan CDATA #IMPLIED
+				fontName CDATA #IMPLIED
+				fontSize CDATA #IMPLIED
+				bold CDATA #IMPLIED
+				italic CDATA #IMPLIED
+				fontColor CDATA #IMPLIED
+				bgColor CDATA #IMPLIED
+				align CDATA #IMPLIED
+				valign CDATA #IMPLIED
+				border CDATA #IMPLIED
+				borderLine CDATA #IMPLIED
+				datatype CDATA #IMPLIED
+				unit CDATA #IMPLIED
+				escape (true|false) "false"
+				format CDATA #IMPLIED>
+<!ELEMENT page-header (date-time|field)*>
+<!ATTLIST page-header   rowHeight CDATA #IMPLIED 
+						fontName CDATA #IMPLIED
+						fontSize CDATA #IMPLIED
+						bold CDATA #IMPLIED
+						italic CDATA #IMPLIED
+						fontColor CDATA #IMPLIED
+						bgColor CDATA #IMPLIED
+						align CDATA #IMPLIED
+						valign CDATA #IMPLIED
+						border CDATA #IMPLIED
+						borderLine CDATA #IMPLIED>
+<!ELEMENT date-time EMPTY>
+<!ATTLIST date-time value CDATA #IMPLIED 
+					pattern CDATA #IMPLIED
+					disable CDATA #IMPLIED
+					rowIndex CDATA #REQUIRED
+					colIndex CDATA #REQUIRED
+					rowspan CDATA #IMPLIED
+					colspan CDATA #IMPLIED
+					fontName CDATA #IMPLIED
+					fontSize CDATA #IMPLIED
+					bold CDATA #IMPLIED
+					italic CDATA #IMPLIED
+					fontColor CDATA #IMPLIED
+					bgColor CDATA #IMPLIED
+					align CDATA #IMPLIED
+					valign CDATA #IMPLIED
+					border CDATA #IMPLIED
+					borderLine CDATA #IMPLIED>
+<!ELEMENT body-content ((column-header, rownum?, (column|virtualcol)+)|(row|field)+)>
+<!ATTLIST body-content  rowIndex CDATA #REQUIRED 
+						colIndex CDATA #REQUIRED
+						rowHeight CDATA #IMPLIED
+						width CDATA #IMPLIED
+						value CDATA #IMPLIED
+						type (table|detail) "detail"
+						columnWidths CDATA #IMPLIED
+						fontName CDATA #IMPLIED
+						fontSize CDATA #IMPLIED
+						bold (true|false) "false"
+						italic (true|false) "false"
+						fontColor CDATA #IMPLIED
+						bgColor CDATA #IMPLIED
+						align CDATA #IMPLIED
+						valign CDATA #IMPLIED
+						border CDATA #IMPLIED
+						borderLine CDATA #IMPLIED
+						unit CDATA #IMPLIED>
+<!ELEMENT column-header EMPTY>
+<!ATTLIST column-header height CDATA #IMPLIED 
+						width CDATA #IMPLIED
+						fontName CDATA #IMPLIED
+						fontSize CDATA #IMPLIED
+						bold CDATA #IMPLIED
+						italic CDATA #IMPLIED
+						fontColor CDATA #IMPLIED
+						bgColor CDATA #IMPLIED
+						align CDATA #IMPLIED
+						valign CDATA #IMPLIED
+						border CDATA #IMPLIED
+						borderLine CDATA #IMPLIED
+						rowIndex CDATA #REQUIRED
+						colIndex CDATA #IMPLIED>
+<!ELEMENT rownum EMPTY>
+<!ATTLIST rownum 	name CDATA #IMPLIED 
+					width CDATA #IMPLIED
+					fontName CDATA #IMPLIED
+					fontSize CDATA #IMPLIED
+					bold CDATA #IMPLIED
+					italic CDATA #IMPLIED
+					fontColor CDATA #IMPLIED
+					bgColor CDATA #IMPLIED
+					align CDATA #IMPLIED
+					valign CDATA #IMPLIED
+					border CDATA #IMPLIED
+					borderLine CDATA #IMPLIED
+					rowIndex CDATA #IMPLIED
+					colIndex CDATA #IMPLIED
+					rowspan CDATA #IMPLIED
+					colspan CDATA #IMPLIED
+					rowOffset CDATA #IMPLIED>
+<!ELEMENT column EMPTY>
+<!ATTLIST column 	index CDATA #REQUIRED
+					name CDATA #REQUIRED 
+					property CDATA #REQUIRED
+					disable CDATA #IMPLIED
+					width CDATA #IMPLIED
+					fontName CDATA #IMPLIED
+					fontSize CDATA #IMPLIED
+					bold CDATA #IMPLIED
+					italic CDATA #IMPLIED
+					fontColor CDATA #IMPLIED
+					bgColor CDATA #IMPLIED
+					align CDATA #IMPLIED
+					valign CDATA #IMPLIED
+					border CDATA #IMPLIED
+					borderLine CDATA #IMPLIED
+					rowIndex CDATA #IMPLIED
+					colIndex CDATA #IMPLIED
+					rowspan CDATA #IMPLIED
+					colspan CDATA #IMPLIED
+					rowOffset CDATA #IMPLIED
+					datatype (varchar|number|boolean|datetime|number_01) "varchar"
+					format CDATA #IMPLIED
+					valalign CDATA #IMPLIED>
+<!ELEMENT virtualcol EMPTY>
+<!ATTLIST virtualcol 	name CDATA #REQUIRED
+					disable CDATA #IMPLIED
+					fontName CDATA #IMPLIED
+					fontSize CDATA #IMPLIED
+					bold CDATA #IMPLIED
+					italic CDATA #IMPLIED
+					fontColor CDATA #IMPLIED
+					bgColor CDATA #IMPLIED
+					align CDATA #IMPLIED
+					valign CDATA #IMPLIED
+					border CDATA #IMPLIED
+					borderLine CDATA #IMPLIED
+					rowIndex CDATA #IMPLIED
+					colIndex CDATA #IMPLIED
+					rowspan CDATA #IMPLIED
+					colspan CDATA #IMPLIED
+					rowOffset CDATA #IMPLIED>
+<!ELEMENT row (field+)>
+<!ATTLIST row 	index CDATA #IMPLIED
+				height CDATA #IMPLIED 
+				value CDATA #IMPLIED
+				var CDATA #IMPLIED
+				indexVar CDATA #IMPLIED
+				rowStep CDATA #IMPLIED
+				colStep CDATA #IMPLIED
+				disable CDATA #IMPLIED
+				loop (true|false) "false">
+<!ELEMENT page-footer (field*)>
+<!ATTLIST page-footer 	rowHeight CDATA #IMPLIED 
+						fontName CDATA #IMPLIED
+						fontSize CDATA #IMPLIED
+						bold CDATA #IMPLIED
+						italic CDATA #IMPLIED
+						fontColor CDATA #IMPLIED
+						bgColor CDATA #IMPLIED
+						align CDATA #IMPLIED
+						valign CDATA #IMPLIED
+						border CDATA #IMPLIED
+						borderLine CDATA #IMPLIED>
+]>
+
+
+
+<documents>
+
+	<document id="pssprojectcost">
+		<style-sheet name="报价单" single="true" sheetSize="0"
+			reorder="true" showGrid="false" readOnly="false">
+			<page-header fontName="宋体" fontSize="10" fontColor=""
+				bgColor="">
+				<field value="${projectBB.bgBO.bgName}" rowIndex="1" colIndex="2" rowspan="2" 
+					colspan="7" align="centre" valign="bottom" fontSize="27" border="bottom" bold="true" />
+				<field value="${projectBB.bgBO.bgEngName}" rowIndex="3" colIndex="2" rowspan="1" 
+					colspan="7" align="centre"  fontSize="14" border="none"   bold="true" />
+				<field value="报  价  单" rowIndex="4" colIndex="2" rowspan="1" 
+					colspan="7" align="centre"  fontSize="16" border="none" bold="true" />
+
+				<field value="NO.    ${projectBB.bgNum}" rowIndex="5" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="DATE： ${projectBB.curDate}" rowIndex="6" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="FM：   ${projectBB.bgBO.bgName}" rowIndex="7" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="联系人：${projectBB.bgBO.linkman}" rowIndex="8" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="电  话：${projectBB.bgBO.mobile}" rowIndex="9" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="传  真：${projectBB.bgBO.fax}" rowIndex="10" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="电  邮：${projectBB.bgBO.email}" rowIndex="11" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="地  址：${projectBB.bgBO.address}" rowIndex="12" colIndex="6" rowspan="1" 
+					colspan="6" align="left"  fontSize="11" border="none" bold="true" />
+					
+				<field value="TO:    ${projectBB.customerBO.name}" rowIndex="7" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="联系人：${projectBB.customerBO.linkman}" rowIndex="8" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="电  话：${projectBB.customerBO.mobile}" rowIndex="9" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="传  真：${projectBB.customerBO.fox}" rowIndex="10" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="电  邮：${projectBB.customerBO.email}" rowIndex="11" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				<field value="地  址：${projectBB.customerBO.address}" rowIndex="12" colIndex="0" rowspan="1" 
+					colspan="4" align="left"  fontSize="11" border="none" bold="true" />
+				
+			</page-header>
+			<body-content type="table"
+				value="${projectBB.selectedProjects}" rowIndex="14" colIndex="0"
+				rowHeight="400" fontName="宋体" fontSize="9" fontColor=""
+				bgColor="automatic" align="left" valign="left" bold="false"
+				italic="false">
+				<column-header rowIndex="13" colIndex="0" fontName="宋体"
+					fontSize="10" fontColor="" bgColor="" align="left" valign="left"
+					bold="true" height="360" />
+				<column index="0" width="20" name="零件名称" 
+					property="name" fontName="" fontSize="" fontColor=""
+					bgColor="" align="left" valign="left" datatype="varchar" />
+					
+				<column index="1" width="10" name="克重" 
+					property="weight" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  valign="right" valalign="right"  datatype="number" format="###0"/>
+				
+				<column index="2" width="15" name="材料" 
+					property="textureName" fontName="" fontSize="" fontColor=""
+					bgColor="" align="left"  datatype="varchar" />
+				<column index="3" width="15" name="单价" 
+					property="emptyStr" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  valign="right" valalign="right" datatype="number" format="###0.00" />
+				<column index="4" width="10" name="水口类型" 
+					property="nozzleTypeName" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  datatype="varchar" />
+				<column index="5" width="10" name="前模仁" 
+					property="qianMoren" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  datatype="varchar" />
+				<column index="6" width="10" name="后模仁" 
+					property="houMoren" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  datatype="varchar" />
+				<column index="7" width="10" name="模腔穴数" 
+					property="holeNum" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"   datatype="varchar" />
+				<column index="8" width="15" name="使用寿命(万次)" 
+					property="modelNum" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right" valign="right" valalign="right" datatype="number"  format="###0" />
+				<column index="9" width="15"  name="制作周期(天)" 
+					property="cycle" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right" valign="right" valalign="right" datatype="number"  format="###0" />
+				<column index="10" width="12"   name="价格(元)" 
+					property="suggestMoney.value" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right" valign="right" valalign="right" datatype="number" format="###0.00" />
+				
+				<column index="11" width="20" name="备注" 
+					property="memo" fontName="" fontSize="" fontColor=""
+					bgColor="" align="right"  datatype="varchar" />
+
+							
+			</body-content>
+			
+		</style-sheet>
+	</document>
+</documents>

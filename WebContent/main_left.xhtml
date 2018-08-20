@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<h:form>
+		<p:accordionPanel multiple="true" styleClass="left-ui-accordion"
+			activeIndex="2,3,4">
+			<c:forEach items="#{mainOldBB.moduleList}" var="md">
+				<!-- <p:repeat value="#{mainOldBB.moduleList}" var="md"> -->
+				<h:outputText value="#{md.moduleName}" />
+				<p:tab title="#{md.moduleName}">
+					<p:menu>
+						<c:forEach items="#{md.moduleFunctions}" var="mf">
+							<c:if test="#{mf.functionType==0}">
+							<p:menuitem value="#{mf.functionName}" action="#{mainOldBB.openTab}"
+								ajax="true" update="@widgetVar(contentTab)" >
+								<f:setPropertyActionListener value="#{mf.functionName}"
+									target="#{mainOldBB.currentTab.title}" />
+								<f:setPropertyActionListener value="#{mf.functionBean}"
+									target="#{mainOldBB.currentTab.functionCode}" />
+								<f:setPropertyActionListener value="#{mf.functionSrc}"
+									target="#{mainOldBB.currentTab.url}" />
+							</p:menuitem>
+							</c:if>
+							<c:if test="#{mf.functionType==1}">
+								<p:menuitem value="#{mf.functionName}" process="@this"  
+									oncomplete="window.open('#{mf.functionSrc}')">
+								 
+							</p:menuitem>
+							</c:if>
+						</c:forEach>
+					</p:menu>
+				</p:tab>
+				<!--</p:repeat>-->
+			</c:forEach>
+
+		</p:accordionPanel>
+		
+
+		<!-- 
+		<p:accordionPanel multiple="true" styleClass="left-ui-accordion"
+			activeIndex="0,1,2"
+			style="padding: 0px;	overflow: visible;margin-bottom: 10px;margin-top: 2px;margin: 2px auto 10px;">
+			<p:tab title="基础数据管理">
+				<p:menu>
+					<p:menuitem value="字典管理" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="字典管理"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="dataDicBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/cdm/datadic.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					<p:menuitem value="物料管理" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="物料管理"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="materiaBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/cdm/materia.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					
+					<p:menuitem value="客户管理" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="客户管理"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="customerBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/cdm/customer.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+
+				</p:menu>
+			</p:tab>
+			<p:tab title="模具管理">
+				<p:menu styleClass="left-ui-menu">
+					<p:menuitem value="报价下单" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="报价下单"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="projectBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/pss/project.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					
+					<p:menuitem value="模具清单" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="模具清单"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="projectListBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/pss/projectList.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					
+					
+		
+				</p:menu>
+			</p:tab>
+
+			<p:tab title="系统管理">
+				<p:menu styleClass="left-ui-menu">
+					<p:menuitem value="用户管理" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="用户管理"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="userBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/sys/user.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					<p:menuitem value="组织管理" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="组织管理"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="userGroupBB"
+							target="#{mainOldBB.currentTab.functionCode}" />
+						<f:setPropertyActionListener value="pages/sys/userGroup.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+					
+					<p:menuitem value="退出登录" update="@widgetVar(loginWin)" action="#{mainOldBB.logout}">
+						
+					</p:menuitem>
+		
+				</p:menu>
+			</p:tab>
+			
+			<p:tab title="报表中心">
+				<p:menu styleClass="left-ui-menu">
+					<p:menuitem value="统计报表" action="#{mainOldBB.openTab}" ajax="true"
+						update="@widgetVar(contentTab)">
+						<f:setPropertyActionListener value="统计报表"
+							target="#{mainOldBB.currentTab.title}" />
+						<f:setPropertyActionListener value="pages/sys/error.xhtml"
+							target="#{mainOldBB.currentTab.url}" />
+					</p:menuitem>
+		
+				</p:menu>
+			</p:tab>
+
+		</p:accordionPanel>
+	 -->
+	</h:form>
+</html>

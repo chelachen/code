@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:form>
+	<p:dock position="top"  proximity="20">
+		<c:forEach items="#{mainBB.moduleList}"  var="s">
+			<p:menuitem ajax="true" icon="#{resource[s.iconUrlBig]}" value= "#{s.moduleName}"  
+										    update="@form:@parent:mainForm:mainPanelGrid" 
+											action="#{mainBB.changeMemuTab}" 
+											 style="background-color:transparent;border-color:transparent;z-index:100000;">
+											<f:setPropertyActionListener
+												target="#{mainBB.currentModuleBO}" value="#{s}" />
+											<f:setPropertyActionListener
+												target="#{mainBB.mainContentPage}"
+												value="/pages/main/new_main_home.xhtml" />
+												
+											<f:setPropertyActionListener
+												target="#{mainBB.mainOnePanelGroup}" value="false" />
+											<f:setPropertyActionListener
+												target="#{mainBB.mainTowPanelGroup}" value="true" />
+												
+											<f:setPropertyActionListener target="#{mainBB.seleteTab}"
+											value="firstTab" />
+											<f:setPropertyActionListener
+											target="#{mainBB.mainContentPage}"
+											value="/pages/main/new_main_home.xhtml" />
+										</p:menuitem>
+			
+		</c:forEach>
+	</p:dock>
+
+	<!-- 
+		 <p:menubar style=" background-color:transparent;border-color:transparent;">
+ 			<c:forEach items="#{mainOldBB.moduleList}" var="md">
+ 					<p:submenu label="#{md.moduleName}" >
+						<c:forEach items="#{md.moduleFunctions}" var="mf">
+							<c:if test="#{mf.functionType==0}">
+							<p:menuitem value="#{mf.functionName}" action="#{mainOldBB.openTab}" 
+								ajax="true" update="@widgetVar(contentTab)" icon="#{resource[mf.iconUrlBig]}">
+								<f:setPropertyActionListener value="#{mf.functionName}"
+									target="#{mainOldBB.currentTab.title}" />
+								<f:setPropertyActionListener value="#{mf.functionBean}"
+									target="#{mainOldBB.currentTab.functionCode}" />
+								<f:setPropertyActionListener value="#{mf.functionSrc}"
+									target="#{mainOldBB.currentTab.url}" />
+							</p:menuitem>
+							</c:if>
+							<c:if test="#{mf.functionType==1}">
+								<p:menuitem value="#{mf.functionName}" process="@this"  
+									oncomplete="window.open('#{mf.functionSrc}')">
+								 
+							</p:menuitem>
+							</c:if>
+						</c:forEach>
+						</p:submenu>
+					</c:forEach>				
+		</p:menubar>
+		 -->
+</h:form>
+</html>

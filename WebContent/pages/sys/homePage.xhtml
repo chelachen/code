@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+	 
+		<p:toolbar id="hometb"  widgetVar="hometb">
+			<f:facet name="left">
+				<p:commandButton value="进度总览"  action="#{homeBB.loadProjectOverview}" update="overviewPieDialog"  process="@this"
+					rendered="#{homeBB.pandect}" 
+					oncomplete="PF('overviewPieDialog').show();"/>
+				
+				<p:commandButton value="扫码报工" process="@this"  
+						oncomplete="window.open('pages/sys/scan.xhtml')">
+				</p:commandButton>
+				
+				<p:commandButton value="进度总控" process="@this"  
+						oncomplete="window.open('schedule.xhtml')">
+				</p:commandButton>
+			</f:facet>
+			<f:facet name="right">
+				<p:inputText value="#{homeBB.searchStr}" style="margin-right:10px" placeholder="输入编号或名称搜索" />
+				<p:commandButton  title="搜索" icon="ui-icon-search" action="#{homeBB.loadProjectSchedule}" 
+				process="hometb,@this" update="@widgetVar(growl),@widgetVar(homeDataGrid)"/>
+			</f:facet>
+		</p:toolbar>
+
+
+		<p:dialog header="进度总览" draggable="true" id="overviewPieDialog" widgetVar="overviewPieDialog"
+			minimizable="false" maximizable="false" resizable="false"
+			modal="false" >
+			<p:chart id="overviewPie" type="pie" model="#{homeBB.pieProjectModel}"
+				style="width:400px;height:300px" />
+		</p:dialog>
+
+
+	</h:form>
+</html>
+

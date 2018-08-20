@@ -1,0 +1,1768 @@
+/* `Basic HTML
+----------------------------------------------------------------------------------------------------*/
+
+
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  /**background: #222;*/
+   /*font-family:"����";*/
+   font-size:12px;
+}
+
+a {
+  /*text-decoration: none;*/
+}
+
+li {
+  list-style: none;
+}
+
+/* `Misc
+----------------------------------------------------------------------------------------------------*/
+
+.abs {
+  top: -42px;
+  left: -3px;
+  right: auto;
+  bottom: auto;
+  color: #333333; 
+  /*font: 12px/1.5 tahoma,helvetica,clean,sans-serif;*/
+}
+
+.align_center {
+  text-align: center;
+}
+
+.align_right {
+  text-align: right;
+}
+
+.float_left {
+  float: left;
+  line-height: 20px;
+}
+
+.float_right {
+  float: right;
+}
+
+.ui-resizable-se {
+  background: url(../images/gui/window_corner.gif) no-repeat right bottom;
+  font-size: 0;
+  overflow: hidden;
+  width: 15px;
+  height: 15px;
+  right: 0;
+  bottom: 0;
+}
+
+div.ui-resizable-handle {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* `Icons
+----------------------------------------------------------------------------------------------------*/
+
+.icon {
+  background: url(../images/gui/trans_white.png) no-repeat -99999px -99999px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.3;
+  padding: 6px 1px 6px;
+  text-align: center;
+  text-shadow: #000 0 1px 2px;
+  width: 80px;
+}
+
+.icon.active {
+  background: url(../images/gui/trans_black.png);
+}
+
+.icon img {
+  background: url(../images/gui/trans_black.png) no-repeat -99999px -99999px;
+  display: block;
+  margin: 0 auto 5px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon:hover,
+.icon.ui-draggable-dragging {
+  background-position: 0 0;
+  background-repeat: repeat;
+  border: 1px solid #fff;
+  padding: 5px 0 5px;
+}
+
+.icon.ui-draggable-dragging {
+  z-index: 20;
+}
+
+.boxes {
+	/*font-family: Arial, sans-serif;*/
+	list-style-type: none;
+	margin: 20px 0px 0px 20px;
+	padding: 0px;
+	width:100%;
+	bottom:30px;
+}
+
+.boxes li {
+	position: relative;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-background-clip: padding-box;
+	margin: 2px 2px 0px 0px;
+	width:82px;
+	height:68px;
+
+}
+
+/* `Windows
+----------------------------------------------------------------------------------------------------*/
+.window {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  color: #000;
+  display: none;
+  width: 700px;
+  height: 300px;
+  top: 30px;
+  left: 120px;
+  z-index: 2;
+}
+
+.window.window_stack,
+.window.ui-draggable-dragging {
+  z-index: 10;
+}
+
+.window.ui-draggable-dragging {
+  opacity: 0.5;
+}
+
+.window.ui-draggable-dragging .window_content,
+.window.ui-draggable-dragging .window_bottom {
+  display: none;
+}
+
+.window_full.ui-draggable-dragging {
+  opacity: 1;
+}
+
+.window_full.ui-draggable-dragging .window_content,
+.window_full.ui-draggable-dragging .window_bottom {
+  display: block;
+}
+
+.window_full {
+  border: 0;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -webkit-background-clip: padding-box;
+  width: 100%;
+  height: 100%;
+}
+
+.window_full .ui-resizable-se {
+  display: none;
+}
+
+.window_top {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+  color: #fff;
+  font-weight: bold;
+  overflow: hidden;
+  line-height: 30px;
+  padding: 0 10px;
+  text-shadow: #000 0 1px 1px;
+  height: 30px;
+}
+
+.window_top img {
+  float: left;
+  margin: 3px 5px 0 0;
+}
+
+.window_bottom {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: #000 0 1px 1px;
+  height: 20px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  color:white;
+}
+
+.window_min,
+.window_resize,
+.window_close {
+
+}
+
+.window_min:hover {
+  background-position: 0 -15px;
+}
+
+.window_resize {
+  background-position: -28px 0;
+}
+
+.window_resize:hover {
+  background-position: -28px -15px;
+}
+
+.window_close {
+  background-position: -56px 0;
+}
+
+.window_close:hover {
+  background-position: -56px -15px;
+  box-shadow: #f00 0 0 10px;
+  -moz-box-shadow: #f00 0 0 10px;
+  -webkit-box-shadow: #f00 0 0 10px;
+}
+
+.window_min:hover,
+.window_resize:hover {
+  box-shadow: #09f 0 0 10px;
+  -moz-box-shadow: #09f 0 0 10px;
+  -webkit-box-shadow: #09f 0 0 10px;
+}
+
+.window_inner {
+  padding: 1px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.window_content {
+  background: url(../images/gui/window_content.gif) repeat-y;
+  line-height: 1.5;
+  overflow: auto;
+  top: 25px;
+  left: 1px;
+  right: 1px;
+  bottom: 23px;
+}
+
+.window_aside {
+  float: left;
+  font-size: 12px;
+  padding: 10px 12px 10px 10px;
+  width: 150px;
+}
+
+.window_main {
+  background: #fff;
+ /** margin: 0 0 0 173px;*/
+  min-height: 100%;
+}
+
+.window_full .window_top,
+.window_full .window_bottom {
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -webkit-background-clip: padding-box;
+}
+
+.window_full .window_inner {
+  bottom: -1px;
+}
+
+/* `Table >> Data
+----------------------------------------------------------------------------------------------------*/
+
+table.data {
+  width: 100%;
+  white-space: nowrap;
+}
+
+table.data th,
+table.data td {
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
+table.data th {
+  background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  font-weight: bold;
+  text-shadow: #fff 0 1px 1px;
+  white-space: nowrap;
+}
+
+table.data th:first-child {
+  border-left: 0;
+}
+
+table.data img {
+  display: block;
+}
+
+table.data tbody tr:nth-child(even) td {
+  background: #def;
+}
+
+table.data tbody tr.active td {
+  background: #06c url(../images/gui/bar_top_link.png) repeat-x;
+  color: #fff;
+}
+
+th.shrink {
+  width: 1%;
+}
+
+/* `Bar >> Top + Bottom
+----------------------------------------------------------------------------------------------------*/
+
+#bar_top,
+#taskBar {
+  font-weight: bold;
+  padding: 0 10px;
+  left: 0;
+  right: 0;
+}
+
+#bar_top {
+  background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
+  border-bottom: 1px solid #333;
+  color: #999;
+  line-height: 25px;
+  padding-right: 20px;
+  text-shadow: #fff 0 1px 1px;
+  height: 25px;
+  top: 0;
+}
+
+#taskBar {
+  border-top: 1px solid #fff;
+  color: #fff;
+  font-size: 13px;
+  line-height: 30px;
+  opacity: 0.8;
+  overflow: hidden;
+  /*padding-top: 5px;
+  padding-bottom: 5px;*/
+  text-shadow: #000 0 1px 1px;
+  height: 30px;
+  bottom: 0;
+}
+
+#toolBar {
+    bottom: 0;
+    height: 5px;
+    margin: 0;
+    position: absolute;
+    width: 1%;
+    z-index: 110 !important;
+}
+
+.toolBar_bg {
+ background: url(../images/gui/bar_bottom.png) repeat-x left top;
+} 
+
+.toolBar_bg {
+ background: nonde;
+ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/gui/bar_bottom.png",sizingMethod="scale");
+} 
+
+#taskBar {
+    float: left;
+    height: 30px;
+    position: relative;
+}
+
+.toolBar_bg {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.alloy_start_button_container {
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 50px;
+}
+
+.alloy_start_button {
+   background: url("../images/gui/start_second.png") no-repeat scroll 0px 0px transparent;
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    left: 2px;
+    position: absolute;
+    top: 41px;
+    width: 100px;
+    z-index: 10;
+   
+}
+
+
+.alloy_start_button:hover {
+    background-position: 0px 0px;
+}
+
+#statusBar {
+    float: left;
+    height: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.quickPanel {
+    float: right;
+    height: 29px;
+    margin: 1px 0 0;
+    position: relative;
+    z-index: 10;
+}
+
+.statusBar_line {
+    background: url("../images/gui/sprite_main_png.png") no-repeat scroll 0 -110px transparent;
+}
+
+.statusBar_line {
+    display: inline;
+    float: left;
+    height: 29px;
+    margin: 0 2px 0 0;
+    overflow: hidden;
+    width: 2px;
+}
+
+.quickPanelRunningApp:hover {
+    background: none repeat scroll 0 0 #BEECFC;
+}
+
+#quickPanelPopupArrow {
+    background: url("../images/gui/btn_more.png") no-repeat scroll center center transparent;
+	cursor:pointer;
+    display: none;
+    float: left;
+    height: 30px;
+    width: 20px;
+}
+
+.quickPanelRunningApp {
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 3px 3px 0;
+    overflow: hidden;
+    padding: 3px;
+    position: relative;
+    width: 16px;
+}
+
+.quickPanelRunningApp img {
+    float: left;
+	cursor:pointer;
+    height: 16px;
+    padding: 2px 0 0;
+    width: 16px;
+}
+
+fieldset, img {
+    border: 0 none;
+}
+
+.quickPanelRunningAppText {
+    display: none;
+}
+
+.copyrightBar {
+    background: url("../images/gui/portal_all_png.png") no-repeat scroll -80px -230px transparent;
+    bottom: 6px;
+    height: 14px;
+    left: 50%;
+    margin: 0 0 0 -160px;
+    overflow: hidden;
+    position: absolute;
+    width: 320px;
+    z-index: -1;
+}
+
+.systemClock {
+    display: block;
+    float: left;
+    margin-top: 5px;
+    text-align: center;
+    width: 105px;
+	color:#666;
+}
+
+.statusBarButton {
+    background: url("../images/gui/portal_all_png.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 22px;
+    margin: 5px 10px 0;
+    overflow: hidden;
+    width: 18px;
+}
+
+.statusBarButton:hover {
+    height: 26px;
+    margin: 1px 1px 0;
+    width: 36px;
+}
+
+.statusBar_login_level_1 .login_level_1, .statusBar_login_level_2 .login_level_2, .statusBar_login_level_2 .login_level_1, .statusBar_login_level_3 .statusBarButton {
+    display: inline-block;
+}
+
+.themeSettingButton {
+    background-position: -20px -20px;
+}
+
+.showDesktopButton {
+    background-position: -120px -20px;
+}
+
+.showDesktopButton:hover {
+    background-position: -240px -320px;
+}
+
+.themeSettingButton:hover {
+    background-position: -40px -320px;
+}
+
+:link, :visited {
+   /* text-decoration: none;*/
+}
+
+a {
+    color: #45649E;
+    /*font: 12px/1.5 tahoma,helvetica,clean,sans-serif;*/
+}
+
+/*#desktop {
+    color: #333333;
+    cursor: default;
+    font: 12px/1.5 tahoma,helvetica,clean,sans-serif;
+}*/
+
+/* `Bar >> Links
+----------------------------------------------------------------------------------------------------*/
+
+#bar_top li,
+#taskBar li {
+  float: left;
+}
+
+#bar_top li a,
+#taskBar li a {
+  display: block;
+  padding: 0 10px;
+}
+
+#bar_top li a {
+  background-image: url(../images/gui/bar_top_link.png);
+  background-repeat: no-repeat;
+  background-position: -99999px -99999px;
+  color: #000;
+  overflow: hidden;
+  height: 25px;
+  min-height: 1px;
+}
+
+#bar_top a.active {
+  background-color: #06c;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  color: #fff;
+  text-shadow: none;
+}
+
+#bar_top ul.menu {
+  background: #eee;
+  border: 1px solid #333;
+  border-top-width: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+  display: none;
+  font-weight: normal;
+  margin: 1px 0 0 -1px;
+  padding: 1px 1px 0;
+  position: absolute;
+  min-width: 200px;
+  z-index: 30;
+}
+
+#bar_top ul.menu li {
+  float: none;
+}
+
+#bar_top ul.menu a {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  min-width: 180px;
+}
+
+#bar_top ul.menu li:last-child a {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+}
+
+#bar_top ul.menu a:hover {
+  background: #06c url(../images/gui/bar_top_link.png) repeat-x;
+  color: #fff;
+  text-shadow: none;
+}
+
+#taskBar li {
+  display: none;
+  margin: 1px 0 10px 5px;
+  min-width: 150px;
+}
+
+#taskBar li a {
+  background: #333;
+}
+
+#taskBar a {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  color: #fff;
+  overflow: hidden;
+  padding: 0 10px;
+  height: 26px;
+  line-height:26px;
+}
+
+#taskBar a:hover {
+  background: #000;
+}
+
+#taskBar a:active {
+  background: #c60;
+  border: 1px solid #fff;
+  padding: 0 9px;
+}
+
+#taskBar li a img {
+  float: left;
+  margin: 4px 5px 0 -5px;
+}
+
+#taskBar .float_left img,
+#taskBar .float_right img {
+  display: block;
+  padding: 4px 0 0;
+}
+
+/* `Wrapper + Wallpaper + Desktop
+----------------------------------------------------------------------------------------------------*/
+
+#wallpaper {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#wrapper {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 700px;
+  min-height: 500px;
+}
+
+.desktop {
+  /*overflow: hidden;*/
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  display:none;
+}
+
+/*------------------------------- Cloud--------------------------------------------- */
+.cloud
+{
+	background: url("../images/misc/cloud.png");
+	height: 250px;
+	width: 580px;
+	position: absolute;
+
+}
+.hScroll
+{
+	overflow: hidden;
+}
+
+
+/**---------------------------------�����-----------------------------------------------*/
+
+.window_outer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 10px;
+}
+
+.window_inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.window_titleBar {
+	height: 28px;
+	overflow: hidden;
+	
+}
+
+.window_title {
+	line-height: 20px;
+	overflow: hidden;
+}
+
+.ie6_0 .window_title {
+	word-break: break-all;
+}
+
+.window_content {
+	margin: 0;
+	/**height: 100%;*/
+	overflow: hidden;
+}
+
+.window_bodyOuter {
+	border: 1px solid #A1B4B0;
+	top: 28px;
+	bottom: 0;
+	width: 100%;
+	position: absolute;
+}
+
+.window_toolBar {
+	height: 28px;
+	background: #e9e9e9;
+	display: none;
+	position: relative;
+	border-bottom: 1px solid #B2C3CC;
+	z-index: 10;
+}
+
+.window_bodyArea {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	overflow: hidden;
+	background: transparent;
+}
+
+.window_div {
+	background: #000;
+	color: #FFF;
+	height: 100%;
+	width: 100%;
+}
+
+
+a.window_close {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_max {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_fullscreen {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+
+
+.ie6_0 .fullscreen_tip {
+	background: none;
+	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader ( src =
+		'../images/gui/fullscreen_tip.png',
+		sizingMethod = 'crop' );
+}
+
+a.window_restore {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_restore_full {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_min {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_refresh {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_pinUp {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+a.window_pinDown {
+	display: none;
+	float: right;
+	margin-left: 4px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+.window_controlArea {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	padding: 3px 0 0 0;
+	height: 23px;
+	width: 100%;
+}
+
+a.window_button {
+	display: none;
+	float: right;
+	margin-left: 10px;
+	height: 23px;
+	width: 66px;
+	cursor: pointer;
+	color: #333;
+	text-align: center;
+	line-height: 23px;
+}
+
+a.window_button_disabled {
+	color: #CCC;
+}
+
+.window_frame {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.window_ajax {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.window_bigIframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+}
+
+.window_bg_container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.window_current .window_bg_container_ipad {
+	background-color: rgba(232, 232, 232, 1);
+}
+
+.window_bg_container_ipad {
+	position: absolute;
+	left: -4px;
+	top: -4px;
+	right: -4px;
+	bottom: -5px;
+	z-index: -1;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	background-color: rgba(232, 232, 232, .8);
+	-webkit-border-radius: 4px;
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.window_bg {
+	position: absolute;
+	display: block;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.window_center {
+	width: 100%;
+	height: 100%;
+}
+
+.window_t {
+	top: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_t {
+	top: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_rt {
+	top: -10px;
+	right: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_rt {
+	top: -10px;
+	right: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_r {
+	right: -10px;
+	height: 100%;
+	width: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_r {
+	right: -10px;
+	height: 100%;
+	width: 10px;
+	overflow: hidden;
+}
+
+.window_rb {
+	bottom: -10px;
+	right: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_rb {
+	bottom: -10px;
+	right: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_b {
+	bottom: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_b {
+	bottom: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_lb {
+	bottom: -10px;
+	left: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_lb {
+	bottom: -10px;
+	left: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_l {
+	left: -10px;
+	height: 100%;
+	width: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_l {
+	left: -10px;
+	height: 100%;
+	width: 10px;
+	overflow: hidden;
+}
+
+.window_lt {
+	top: -10px;
+	left: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.window_current .window_lt {
+	top: -10px;
+	left: -10px;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.edit_input {
+	border: none;
+	background: transparent;
+	text-align: center;
+	color: white;
+}
+
+.widget_content .content_area {
+    background: none repeat scroll 0 0 transparent;
+}
+.content_area iframe {
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.window_current .text, .window_current a.text {
+    color: #333333;
+}
+.titleText, a.titleText {
+    color: #666666;
+    font-weight: bold;
+}
+.window_current .titleText, .window_current a.titleText {
+    color: black;
+}
+.appText a {
+    color: white;
+}
+.toolBar_bg {
+    background: url("../images/gui/toolbar_bg.png?t=20110421001") repeat-x scroll left top transparent;
+}
+.ie6_0 .toolBar_bg, .ie7_0 .toolBar_bg {
+}
+.window {
+    background: url("../images/gui/transparent.gif?t=20110421001") repeat scroll 0 0 transparent;
+}
+.window_title {
+    height: 25px;
+}
+.window_titleBar {
+    height: 25px;
+}
+.window_bodyArea {
+    top: 0;
+}
+
+a.window_action_button {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll -122px -22px transparent;
+    height: 19px;
+    width: 21px;
+}
+.ie6_0 a.window_action_button, .ie7_0 a.window_action_button {
+    background-image: url("../images/gui/sprite_main_gif.gif?t=20110421001");
+}
+a.window_close {
+    background-position: -123px -24px;
+}
+a.window_close:hover {
+    background-position: -123px -53px;
+}
+a.window_max {
+    background-position: -94px -24px;
+}
+a.window_max:hover {
+    background-position: -94px -53px;
+}
+a.window_fullscreen {
+    background-position: -34px -24px;
+}
+a.window_fullscreen:hover {
+    background-position: -34px -53px;
+}
+a.window_restore_full {
+    background-position: -152px -24px;
+}
+a.window_restore_full:hover {
+    background-position: -152px -53px;
+}
+a.window_restore {
+    background-position: -183px -24px;
+}
+a.window_restore:hover {
+    background-position: -183px -53px;
+}
+a.window_min {
+    background-position: -63px -24px;
+}
+a.window_min:hover {
+    background-position: -63px -53px;
+}
+a.window_refresh {
+    background-position: -5px -24px;
+}
+a.window_refresh:hover {
+    background-position: -5px -53px;
+}
+a.window_pinUp {
+    background-position: -182px -24px;
+}
+a.window_pinUp:hover {
+    background-position: -182px -53px;
+}
+a.window_pinDown {
+    background-position: -152px -24px;
+}
+a.window_pinDown:hover {
+    background-position: -152px -53px;
+}
+a.window_button {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll 0 -80px transparent;
+}
+a.window_button:hover {
+    background-position: 0 -80px;
+}
+a.window_ok {
+    background-position: 0 -80px;
+}
+a.window_ok:hover {
+    background-position: 0 -80px;
+}
+a.window_cancel {
+    background-position: 0 -80px;
+}
+a.window_cancel:hover {
+    background-position: 0 -80px;
+}
+a.window_previous {
+    background-position: 0 -80px;
+}
+a.window_previous:hover {
+    background-position: 0 -80px;
+}
+a.window_next {
+    background-position: 0 -80px;
+}
+a.window_next:hover {
+    background-position: 0 -80px;
+}
+.window_bg_container_ipad {
+    background-color: rgba(182, 234, 253, 0.8);
+}
+.window_current .window_bg_container_ipad {
+    background-color: #B6EAFD;
+}
+.window_center {
+    background: url("../images/gui/window.png?t=20110421001") repeat scroll left top transparent;
+}
+.ie6_0 .window_center, .ie7_0 .window_center {
+    background: none repeat scroll 0 0 #C4DEED;
+}
+.window_current .window_center {
+    background: url("../images/gui/window_cur.png?t=20110421001") repeat scroll left top transparent;
+}
+.ie6_0 .window_current .window_center, .ie7_0 .window_current .window_center {
+    background: none repeat scroll 0 0 #B6EAFD;
+}
+.window_t {
+    background: url("../images/gui/sprite_repeat_x_png.png?t=20110421001") repeat-x scroll 0 -80px transparent;
+}
+.ie6_0 .window_t, .ie7_0 .window_t {
+    background-image: url("../images/gui/sprite_repeat_x_gif.gif?t=20110421001");
+}
+.window_current .window_t {
+    background-position: 0 -100px;
+}
+.window_rt {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll -10px 0 transparent;
+}
+.ie6_0 .window_rt, .ie7_0 .window_rt {
+    background-image: url("../images/gui/sprite_main_gif.gif?t=20110421001");
+}
+.window_current .window_rt {
+    background-position: -30px 0;
+}
+.window_r {
+    background: url("../images/gui/sprite_repeat_y_png.png?t=20110421001") repeat-y scroll -10px 0 transparent;
+}
+.ie6_0 .window_r, .ie7_0 .window_r {
+    background-image: url("../images/gui/sprite_repeat_y_gif.gif?t=20110421001");
+}
+.window_current .window_r {
+    background-position: -30px 0;
+}
+.window_rb {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll -10px -10px transparent;
+}
+.ie6_0 .window_rb, .ie7_0 .window_rb {
+    background-image: url("../images/gui/sprite_main_gif.gif?t=20110421001");
+}
+.window_current .window_rb {
+    background-position: -30px -10px;
+}
+.window_b {
+    background: url("../images/gui/sprite_repeat_x_png.png?t=20110421001") repeat-x scroll 0 -90px transparent;
+}
+.ie6_0 .window_b, .ie7_0 .window_b {
+    background-image: url("../images/gui/sprite_repeat_x_gif.gif?t=20110421001");
+}
+.window_current .window_b {
+    background-position: 0 -110px;
+}
+.window_lb {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll 0 -10px transparent;
+}
+.ie6_0 .window_lb, .ie7_0 .window_lb {
+    background-image: url("../images/gui/sprite_main_gif.gif?t=20110421001");
+}
+.window_current .window_lb {
+    background-position: -20px -10px;
+}
+.window_l {
+    background: url("../images/gui/sprite_repeat_y_png.png?t=20110421001") repeat-y scroll 0 0 transparent;
+}
+.ie6_0 .window_l, .ie7_0 .window_l {
+    background-image: url("../images/gui/sprite_repeat_y_gif.gif?t=20110421001");
+}
+.window_current .window_l {
+    background-position: -20px 0;
+}
+.window_lt {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll 0 0 transparent;
+}
+.ie6_0 .window_lt, .ie7_0 .window_lt {
+    background-image: url("../images/gui/sprite_main_gif.gif?t=20110421001");
+}
+.window_current .window_lt {
+    background-position: -20px 0;
+}
+.statusBar_line {
+    background: url("../images/gui/sprite_main_png.png?t=20110421001") no-repeat scroll 0 -110px transparent;
+}
+
+/**---------------------------------�����л�-----------------------------------*/
+
+#navbar {
+    height: 26px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+     z-index: 11;
+}
+.ie6_0 #navbar, .ie7_0 #navbar {
+    z-index: 12;
+}
+
+.navbarSetTopIcon {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll -100px -459px transparent;
+}
+
+.indicator_container {
+  /**  background: url("../images/gui/indicator_bg_mid.png") repeat-x scroll 0 -31px transparent;**/
+    height: 100%;
+    margin: 0 11px;
+}
+.indicator {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll -197px -587px transparent;
+    color: #0DBBF1;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    /*font-family: ����;*/
+    font-size: 18px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 1.5;
+    margin: 0 5px;
+    outline: medium none;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 30px;
+}
+.ie6_0 .indicator {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+#navbar .left_nav, #navbar .right_nav {
+    margin: 2px 0;
+    overflow: hidden;
+    text-indent: -2000px;
+    width: 20px;
+}
+#navbar .leftbg {
+    background: url("../images/gui/portal_all_png.png?t=20110630002") no-repeat scroll -320px -451px transparent;
+    left: 0;
+}
+#navbar .rightbg {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll -364px -451px transparent;
+    right: 0;
+}
+#navbar .system_button {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 4px -587px transparent;
+    margin: 0 5px 0 0;
+}
+.ie6_0 #navbar .system_button {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+#navbar .system_button:hover {
+    background-position: -26px -587px;
+}
+.mac #navbar .system_button {
+    background-position: -56px -587px;
+}
+.mac #navbar .system_button:hover {
+    background-position: -86px -587px;
+}
+.linux #navbar .system_button {
+    background-position: -116px -587px;
+}
+.linux #navbar .system_button:hover {
+    background-position: -146px -587px;
+}
+.mobileSafari #navbar {
+    width: 222px;
+}
+.mobileSafari #navbar .system_button {
+    display: none;
+}
+.indicator_bg_corner {
+    height: 50px;
+    position: absolute;
+    width: 11px;
+}
+.indicator_5 {
+    margin: 0 0 0 5px;
+}
+.indicator_1:hover {
+    background-position: -226px -587px;
+}
+.indicator_2:hover {
+    background-position: -256px -587px;
+}
+.indicator_3:hover {
+    background-position: -286px -587px;
+}
+.indicator_4:hover {
+    background-position: -316px -287px;
+}
+.indicator_5:hover {
+    background-position: -346px -587px;
+}
+#navbar .nav_current_1 {
+    background-position: -5px -618px;
+}
+#navbar .nav_current_2 {
+    background-position: -45px -618px;
+}
+#navbar .nav_current_3 {
+    background-position: -85px -618px;
+}
+#navbar .nav_current_4 {
+    background-position: -125px -618px;
+}
+#navbar .nav_current_5 {
+    background-position: -165px -618px;
+}
+
+/**---------------------------------��ʼ�˵�-----------------------------------*/
+
+.taskbar_help_menu_container {
+    bottom: 12px;
+    display: none;
+    left: 175px;
+    position: absolute;
+}
+.taskbar_help_menu {
+    /*font-family: Tahoma,Geneva,sans-serif;*/
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+.taskbar_help_menu li {
+    cursor: pointer;
+    height: 22px;
+    list-style: none outside none;
+    padding: 3px 5px 0 10px;
+}
+.taskbar_help_menu li:hover, .taskbar_help_menu_hover {
+    background: none repeat scroll 0 0 #348CCC;
+    color: #FFFFFF;
+}
+.taskbar_help_menu li:hover a, .taskbar_help_menu_hover a {
+    color: #FFFFFF !important;
+}
+.taskbar_help_menu li a {
+    color: #000000;
+    text-decoration: none;
+}
+.taskbar_help_menu_head {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 0 -360px transparent;
+    font-size: 0;
+    height: 6px;
+    line-height: 0;
+    width: 119px;
+}
+.taskbar_help_menu_body {
+    background: url("../images/gui/portal_repeat_y_png.png?t=20110421001") repeat-y scroll -240px 0 transparent;
+    min-height: 70px;
+    padding: 0 1px;
+    width: 117px;
+}
+.taskbar_help_menu_bottom {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll -310px -360px transparent;
+    height: 13px;
+    width: 119px;
+}
+.ie6_0 .taskbar_help_menu_head, .ie7_0 .taskbar_help_menu_head {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+    font-size: 0;
+    line-height: 0;
+}
+.ie6_0 .taskbar_help_menu_body, .ie7_0 .taskbar_help_menu_body {
+    background-image: url("../images/gui/portal_repeat_y_gif.gif?t=20110421001");
+}
+.ie6_0 .taskbar_help_menu_bottom, .ie7_0 .taskbar_help_menu_bottom {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+.taskbar_help_menu_button {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 18px;
+    margin: 2px 6px 0 0;
+    width: 18px;
+}
+.ie6_0 .taskbar_help_menu_button, .ie7_0 .taskbar_help_menu_button {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+.taskbar_help_menu_hot {
+    background-position: 0 -480px;
+}
+.taskbar_help_menu_report {
+    background-position: -120px -480px;
+}
+.taskbar_help_menu_weibo {
+    background-position: -80px -480px;
+}
+.taskbar_help_menu_fankui {
+    background-position: -20px -480px;
+}
+.taskbar_help_menu_report {
+    background-position: -120px -480px;
+}
+.taskbar_help_menu_blog {
+    background-position: -60px -480px;
+}
+.taskbar_help_menu_question {
+    background-position: -40px -480px;
+}
+.taskbar_help_menu_helper {
+    background-position: -100px -480px;
+}
+.taskbar_start_menu_container {
+    bottom: 4px;
+    display: none;
+    left: 4px;
+    position: absolute;
+}
+.taskbar_start_menu_container_show {
+    bottom: 4px;
+    display: block;
+    left: 4px;
+    position: absolute;
+	z-index:300011;
+}
+.taskbar_start_menu_head {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 0 -380px transparent;
+    font-size: 0;
+    height: 6px;
+    line-height: 0;
+    width: 171px;
+    position: relative;Top:24px;
+}
+.taskbar_start_menu_body {
+    background: url("../images/gui/portal_repeat_y_png.png?t=20110421001") repeat scroll -40px 0 transparent;
+    height:auto;
+    overflow: hidden;
+    padding: 0 2px 25px 1px;
+    width: 168px;
+    position: relative;Top:24px;
+}
+.taskbar_start_menu_bottom {
+   background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 0px -380px transparent;
+    height: 21px;
+    width: 170px;
+    position: relative;Top:5px;
+}
+.ie6_0 .taskbar_start_menu_head, .ie7_0 .taskbar_start_menu_head {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+    font-size: 0;
+    line-height: 0;
+}
+.ie6_0 .taskbar_start_menu_body, .ie7_0 .taskbar_start_menu_body {
+    background-image: url("../images/gui/portal_repeat_y_gif.gif?t=20110421001");
+}
+.ie6_0 .taskbar_start_menu_bottom, .ie7_0 .taskbar_start_menu_bottom {
+  /*  background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");*/
+}
+.taskbar_start_menu_selfinfo {
+    height: 44px;
+    padding: 5px 0 8px 8px;
+}
+.taskbar_start_menu_avator {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #999999;
+    cursor: pointer;
+    float: left;
+    height: 40px;
+    overflow: hidden;
+    padding: 1px;
+    position: relative;
+    width: 40px;
+}
+.taskbar_start_menu_nick {
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    margin: 12px 0 0 10px;
+    overflow: hidden;
+    width: 95px;
+}
+
+.taskbar_start_menu_nick a{
+	cursor: pointer;
+}
+
+.taskbar_start_menu_help_arrow {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll -65px -460px transparent;
+    display: block;
+    float: right;
+    height: 12px;
+    margin: 6px 6px 0 0;
+    width: 12px;
+}
+.ie6_0 .taskbar_start_menu_help_arrow, .ie7_0 .taskbar_start_menu_help_arrow {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+.taskbar_start_menu_button {
+    background: url("../images/gui/portal_all_png.png?t=20110630001") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 25px;
+    margin-right: 10px;
+    width: 25px;
+}
+.taskbar_start_menu_button1 {
+    background: url("../images/gui/head_logout.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 25px;
+    margin-right: 10px;
+    width: 25px;
+}
+.ie6_0 .taskbar_start_menu_button, .ie7_0 .taskbar_start_menu_button {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+.taskbar_start_menu_home {
+    background-position: 0 -500px;
+}
+.taskbar_start_menu_favorite {
+    background-position: -40px -500px;
+}
+.taskbar_start_menu_savetodeskptop {
+    background-position: -80px -500px;
+}
+.taskbar_start_menu_subscribe {
+    background-position: -120px -500px;
+}
+.taskbar_start_menu_modify {
+    background-position: -280px -500px;
+}
+.taskbar_start_menu_lock {
+    background-position: -160px -500px;
+}
+.taskbar_start_menu_setting {
+    background-position: -200px -500px;
+}
+.taskbar_start_menu_help {
+    background-position: -320px -500px;
+}
+.taskbar_start_menu_logout {
+    background-position: -240px -530px;
+}
+.taskbar_start_menu_exit {
+    background-position: -240px -500px;
+}
+.taskbar_start_menu_download {
+    background-position: -280px -530px;
+}
+.taskbar_start_menu {
+    /*font-family: Tahoma,Geneva,sans-serif;*/
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+.taskbar_start_menu li {
+    cursor: pointer;
+    line-height: 24px;
+    list-style: none outside none;
+    padding: 5px 2px 5px 10px;
+}
+.taskbar_start_menu li:hover, .taskbar_start_menu_hover {
+    background: none repeat scroll 0 0 #348CCC;
+    color: #FFFFFF;
+}
+.taskbar_start_menu li:hover a, .taskbar_start_menu_hover a {
+    color: #FFFFFF !important;
+}
+.taskbar_start_menu li a {
+    color: #000000;
+    text-decoration: none;
+}
+.taskbar_start_separate_line {
+    border-top: 1px solid #C5C5C5;
+    font-size: 0;
+    height: 1px;
+    line-height: 0;
+    width: 166px;
+}
+.taskbar_start_button {
+ 	background: url("../images/gui/start_second.png") no-repeat scroll 0px 0px transparent;
+     cursor: pointer;
+    float: left;
+    height: 30px;   
+     width: 100px;
+    z-index: 10;
+    position: relative; 
+    Top: 3px;
+    left:-5px;
+}
+.ie6_0 .taskbar_start_button, .ie7_0 .taskbar_start_button {
+    background-image: url("../images/gui/portal_all_gif.gif?t=20110630001");
+}
+.ie6_0 .taskbar_start_button {
+    margin: -19px 0 0 1px;
+}

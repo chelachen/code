@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+
+		<p:outputPanel id="datadicPanel" autoUpdate="false">
+			<h:panelGrid columns="6">
+
+				<h:outputLabel value="编码:" />
+				<p:inputText id="code" value="#{dataDicBB.param.dataClassCode}" />
+				<h:outputLabel value="名称:" />
+				<p:inputText id="name" value="#{dataDicBB.param.dataClassName}" />
+				<h:outputLabel value="编码规则:" />
+				<p:selectOneMenu value="#{dataDicBB.param.dataCodeType}"
+					style="width:160px">
+					<f:selectItem itemLabel="请选择" itemValue="-1" />
+					<f:selectItems value="#{dataDicBB.dataCodeTypeList}" />
+				</p:selectOneMenu>
+
+				<f:facet name="footer">
+					<p:commandButton value="查询" action="#{dataDicBB.findByPager}"
+						rendered="#{dataDicBB.queryable}" update="dataTabledatadic"
+						process="datadicPanel" />
+					<p:commandButton id="adddatadic" value="添加"
+						action="#{dataDicBB.add}" update="datadicdtlDialog"
+						oncomplete="PF('datadicdtlDialog').show();"
+						rendered="#{dataDicBB.addable}" />
+
+				</f:facet>
+			</h:panelGrid>
+			<p:dataTable id="dataTabledatadic" var="row"
+				value="#{dataDicBB.resultList}" paginator="true"
+				rows="#{dataDicBB.pager.pageSize}" rowIndexVar="idx"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+				paginatorPosition="bottom">
+				<p:column headerText="#" style="width:30px">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+				<p:column headerText="操作" styleClass="process-column"
+					style="width:200px">
+
+					<p:commandLink id="datadicdtlEdit" value="编辑 " process="@this"
+						ajax="true" rendered="#{dataDicBB.editable}"
+						action="#{dataDicBB.editDtl}"
+						update="@widgetVar(datadicdtlDialog),@widgetVar(growl)"
+						oncomplete="PF('datadicdtlDialog').show();">
+						<f:setPropertyActionListener target="#{dataDicBB.currentBO}"
+							value="#{row}" />
+					</p:commandLink>
+					<h:outputText value=" | " />
+
+					<p:commandLink value="删除 " oncomplete="PF('confirmDelDialog').show();"
+						process="@this" rendered="#{dataDicBB.deleteable}"
+						update="@form:confirmDelDialog,@widgetVar(dataTabledatadic)">
+						<f:setPropertyActionListener target="#{dataDicBB.currentBO}"
+							value="#{row}" />
+					</p:commandLink>
+
+				</p:column>
+
+				<p:column headerText="数据类别编码">
+					<h:outputText value="#{row.dataClassCode}" />
+				</p:column>
+
+				<p:column headerText="数据类别名称">
+					<h:outputText value="#{row.dataClassName}" />
+				</p:column>
+				<p:column headerText="编码规则">
+					<h:outputText value="#{row.dataCodeTypeString}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:dialog header="数据编辑" draggable="true" widgetVar="datadicdtlDialog"
+				width="1000" height="600" minimizable="true" maximizable="true"
+				resizable="true" onShow="" modal="false" id="datadicdtlDialog">
+				<p:tabView id="dataDicEditTabView" widgetVar="dataDicEditTabView">
+					<p:tab title="主数据">
+						<h:panelGrid columns="2" id="datadicDialogPanel">
+							<h:outputLabel value="数据类别编码:" />
+							<p:inputText value="#{dataDicBB.currentBO.dataClassCode}"
+								maxlength="20" />
+
+							<h:outputLabel value="数据类别名称:" />
+							<p:inputText value="#{dataDicBB.currentBO.dataClassName}"
+								maxlength="30" />
+
+							<h:outputLabel value="编码规则:" />
+							<p:selectOneMenu value="#{dataDicBB.currentBO.dataCodeType}"
+								style="width:160px">
+								<f:selectItems value="#{dataDicBB.dataCodeTypeList}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="备注:" />
+							<p:inputTextarea value="#{dataDicBB.currentBO.memo}"
+								maxlength="100" rows="3" cols="33" />
+
+							<f:facet name="footer">
+								<p:commandButton value="保存" action="#{dataDicBB.save}"
+									ajax="true" process="datadicDialogPanel"
+									update="dataDicEditTabView,@widgetVar(growl),@widgetVar(dataTabledatadic)" />
+							</f:facet>
+
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="子数据">
+						<h:panelGrid columns="2" rendered="#{dataDicBB.currentBO.tree}"
+							id="datadicdtlpanelGrid" widgetVar="datadicdtlpanelGrid">
+							<p:tree value="#{dataDicBB.dataTree}" var="data" 
+								id="datadicdtltree" dynamic="true" selectionMode="single"
+								selection="#{dataDicBB.selectedData}">
+								<p:treeNode>
+									<h:outputText value="#{data.dataName}" />
+								</p:treeNode>
+							</p:tree>
+							<h:panelGrid columns="1" id="curdatapanelGroup"
+								widgetVar="curdatapanelGroup">
+								<h:outputText value="操作指南：1、点击树节点；2、右键选择操作；3、修改并保存" />
+								<h:outputText />
+								<h:panelGroup>
+								<h:outputText value="名称：" />
+								<p:inputText value="#{dataDicBB.dataDicDtlBO.dataName}"
+									maxlength="30" />
+									
+								<h:outputText value="序号：" />
+								<p:inputText value="#{dataDicBB.dataDicDtlBO.sequenceNo}"
+									maxlength="30" />
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:commandButton value="保存" ajax="true"
+										process="@widgetVar(datadicdtlpanelGrid)"
+										update="datadicdtlpanelGrid,@widgetVar(growl)"
+										action="#{dataDicBB.saveDtl}" />
+
+									<p:commandButton value="创建根" process="@this"
+										update="datadicdtltree,@widgetVar(growl)"
+										action="#{dataDicBB.saveRootDtl}" />
+								</h:panelGroup>
+							</h:panelGrid>
+						</h:panelGrid>
+						<p:contextMenu for="datadicdtltree">
+							<p:menuitem value="修改" process="@widgetVar(datadicdtltree)"
+								update="curdatapanelGroup,@widgetVar(growl)"
+								actionListener="#{dataDicBB.updateDtl}" icon="ui-icon-disk" />
+							<p:menuitem value="添加" process="@widgetVar(datadicdtltree)"
+								update="curdatapanelGroup,@widgetVar(growl)"
+								actionListener="#{dataDicBB.addDtl}"
+								icon="ui-icon-arrowrefresh-1-w" />
+							<p:menuitem value="删除" process="@widgetVar(datadicdtlpanelGrid}"
+								update="datadicdtltree,@widgetVar(growl)"
+								actionListener="#{dataDicBB.deletDtl}" icon="ui-icon-close" />
+						</p:contextMenu>
+
+						<h:panelGrid columns="1" rendered="#{dataDicBB.currentBO.enum}"
+							id="datadicdtlenumpanelGrid" widgetVar="datadicdtlenumpanelGrid">
+							<h:panelGroup>
+							<p:commandButton  value="添加" ajax="true"
+								action="#{dataDicBB.addDtlEnum}" update="dataTableEnum"
+								rendered="#{dataDicBB.addable}" />
+							<p:commandButton  value="保存"  ajax="true"
+								action="#{dataDicBB.saveDtlEnum}" update="dataTableEnum,@widgetVar(growl)"
+								rendered="#{dataDicBB.addable}" />
+							</h:panelGroup>	
+							<p:dataTable id="dataTableEnum" var="row"
+								value="#{dataDicBB.currentBO.datadtlList}"
+								widgetVar="dataTableEnum" rowIndexVar="idx">
+								<p:column style="width:15px">
+									<h:outputText value="#{idx+1}" style="width:15px" />
+								</p:column>
+								<p:column headerText="序号" style="width:80px">
+									<h:inputText value="#{row.sequenceNo}" style="width:80px"
+										maxlength="11" />
+								</p:column>
+								<p:column headerText="编码(整数)" style="width:100px">
+									<h:inputText value="#{row.dataCode}" style="width:100px"
+										maxlength="11" />
+								</p:column>
+
+								<p:column headerText="编码(字符)" style="width:100px">
+									<h:inputText value="#{row.corDataCode}" style="width:100px"
+										maxlength="50" />
+								</p:column>
+
+								<p:column headerText="名称" style="width:120px">
+									<h:inputText value="#{row.dataName}" maxlength="50"
+										style="width:120px" />
+								</p:column>
+
+								<p:column headerText="备注" style="width:200px">
+									<h:inputText value="#{row.memo}" maxlength="255"
+										style="width:200px" />
+								</p:column>
+
+
+								<p:column headerText="操作" styleClass="process-column">
+
+									<p:commandLink value="删除 " process="@this"
+										rendered="#{dataDicBB.deleteable}"
+										action="#{dataDicBB.deletDtlEnum}"
+										update="dataTableEnum,@widgetVar(growl)"
+										ajax="true">
+										<f:setPropertyActionListener
+											target="#{dataDicBB.dataDicDtlBO}" value="#{row}" />
+									</p:commandLink>
+								</p:column>
+
+							</p:dataTable>
+
+						</h:panelGrid>
+
+					</p:tab>
+
+				</p:tabView>
+			</p:dialog>
+
+
+
+			<p:dialog header="删除数据字典" draggable="true"
+				widgetVar="confirmDelDialog" minimizable="false" maximizable="false"
+				resizable="false" modal="false" id="confirmDelDialog">
+				<h:panelGrid>
+					<p:row>
+						<h:outputLabel
+							value="确定删除客户:#{dataDicBB.currentBO.dataClassName}?" />
+					</p:row>
+					<p:row>
+						<p:commandButton value="确定" action="#{dataDicBB.delete}"
+							process="@this" update="@widgetVar(growl),dataTabledatadic"
+							oncomplete="PF('confirmDelDialog').hide();" />
+						<p:commandButton value="取消" onclick="PF('confirmDelDialog').hide();" />
+					</p:row>
+
+				</h:panelGrid>
+			</p:dialog>
+
+
+
+		</p:outputPanel>
+
+
+
+
+	</h:form>
+</html>
+

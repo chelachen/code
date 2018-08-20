@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+<f:view contentType="text/html">
+	<h:head>
+		<title>#{loginBB.systemTitle}</title>
+			<link rel="shortcut icon" href="resources/images/favicon.ico"/>
+			<h:outputStylesheet library="css" name="signup.css" />
+			<script src="resources/js/validator.js" language="javascript"
+				type="text/javascript">
+			</script>
+	</h:head>
+
+	<h:body>
+		
+		<div class="LoginBody signinBody">
+			<div class="logo"></div>
+			<div id='content'>
+				<h1>
+					#{loginBB.systemTitle}
+				</h1>
+				<h:form id="signin">
+					<p:growl id="logingrowl" showDetail="false" sticky="false" widgetVar="logingrowl" />
+
+					<div class="zh">
+						<label for='login'>
+							账
+							<span></span>号：
+						</label>
+						<h:inputText id="login" name="login" styleClass="yj"
+							value="#{loginBB.param.userCode}" autocomplete="off"></h:inputText>
+					</div>
+					<div class="mm">
+						<label for='password'>
+							密
+							<span></span>码：
+						</label>
+						<h:inputSecret id="password" name="password" styleClass="yj"
+							value="#{loginBB.param.passWord}"
+							onkeypress="return login(this,event)" autocomplete="off">
+							<p:ajax  event="dblclick" process="signin"
+								listener="#{loginBB.login}"  update="signin" />
+						</h:inputSecret>
+					</div>
+					
+					<h:inputHidden id="invoiceWidth" value="#{loginBB.invoiceWidth}"></h:inputHidden>
+					<h:inputHidden id="invoiceHeight" value="#{loginBB.invoiceHeight}"></h:inputHidden>
+
+					<div class="dr">
+						<p:commandLink value="登 录"  update="signin,@widgetVar(logingrowl)"   onclick="screensnew()"
+							process="signin,invoiceWidth,invoiceHeight"  ajax="true" styleClass="tyAn"
+							action="#{loginBB.login}">
+						</p:commandLink>
+							
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+		
+		<!-- 
+		<div class="foot">
+			©2011 厦门
+			<a target="_blank" href="http://www.tofan.cn/">几凡科技</a>有限公司
+			闽ICP备10202050号
+		</div>
+		 -->
+
+		<script language="javascript">
+
+function login(link, event) {
+	screensnew();
+	if (navigator.appName == "Microsoft Internet Explorer") {
+		if (window.event.keyCode == 13) {
+			window.event.keyCode = 0;
+			link.ondblclick();
+		}
+	} else {
+		var keycode = event.keyCode;
+		if (keycode == 13) {
+			link.ondblclick(event);
+			return false;
+		}
+	}
+
+}
+</script>
+
+	</h:body>
+</f:view> 
+</html>
+

@@ -1,0 +1,659 @@
+html {
+	height: 100%;
+}
+
+body {
+	background:
+		url('#{facesContext.externalContext.requestContextPath}/resources/images/fan/macback.png')
+		no-repeat;
+	margin: 0;
+	padding: 0;
+	font-family: normal 12px Tahoma, Microsoft YaHei, Verdana, Arial,
+		Helvetica, sans-serif;
+	font-size: 80%;
+}
+
+#page {
+	margin: 0 auto;
+	height: 100%;
+	width: 100%;
+}
+
+#header {
+	height: 35px;
+	width: "100%"
+}
+
+#logo {
+	height: 50px;
+}
+
+#logo-img {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	text-decoration: none;
+}
+
+#logo .logo {
+	font: blod 14px;
+	float: right;
+	margin-top: 0px;
+	margin-right: 0px;
+	text-decoration: none;
+	height: 50px;
+	background: -moz-linear-gradient(left, #E5EBFF, #BED6F8);
+}
+
+.logo_a {
+	font: blod 14px;
+	height: 50px;
+}
+
+#header .logo img {
+	border: none;
+}
+
+#header .right-controls {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.head-img {
+	margin-top: 10px;
+	margin-left: 6px;
+	margin-right: 6px;
+	width: 25px;
+	height: 25px;
+	border: none;
+}
+
+.head-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+}
+
+.mainContentPanel {
+	vertical-align: top;
+}
+
+#page-content {
+	height: 100%;
+	width: 100%;
+}
+
+#page-content .left-menu {
+	float: left;
+	height: 550px;
+	width: 30%;
+}
+
+#page-content .left-menu .left-img {
+	margin-left: 4px;
+	margin-top: 5px;
+	width: 85%;
+	height: 10%;
+	display: block;
+	border: none;
+}
+
+#page-content .left-menu .left-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+}
+
+#page-content .left-menu .left-img-set {
+	margin-left: 14px;
+	margin-top: 0px;
+	width: 30px;
+	height: 30px;
+	display: block;
+	border: none;
+}
+
+#page-content .left-menu .left-img-set:hover {
+	border: 0px solid;
+	background-color: #a68787;
+}
+
+#page-content .left-menu .bottom {
+	position: fixed;
+	bottom: 20px;
+	width: 5%;
+	bottom: 20px;
+}
+
+#page-content .content-container {
+	float: right;
+	margin-right: 0px;
+	width: 95%;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.close-img {
+	margin-top: 0px;
+	width: 15px;
+	height: 15px;
+	border: none;
+}
+
+.close-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+}
+
+.pop-close-img {
+	margin-top: 0px;
+	width: 18px;
+	height: 18px;
+	border: none;
+}
+
+.pop-close-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+}
+
+.menu-img {
+	margin-top: 0px;
+	width: 16px;
+	height: 16px;
+	border: none;
+}
+
+#page-content .content-container .func-img {
+	margin-left: 3px;
+	width: 50px;
+	height: 50px;
+	display: block;
+	border: none;
+}
+
+#page-content .content-container .func-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+	background: -moz-linear-gradient(left, #E5EBFF, #c6cacc, #E5EBFF);
+}
+
+#page-content .content-container .process-img {
+	width: 75px;
+	height: 75px;
+	display: block;
+	border: none;
+}
+
+#page-content .content-container .process-img:hover {
+	border: 0px solid;
+	background-color: #c6cacc;
+	background: -moz-linear-gradient(left, #E5EBFF, #c6cacc, #E5EBFF);
+}
+
+#page-content .content-container .process-point-img {
+	width: 96px;
+	height: 35px;
+	border: none;
+}
+
+#page-content .content-container .process-pointright-img {
+	width: 60px;
+	height: 40px;
+	border: none;
+	margin-left: 25%;
+}
+
+#page-content .content-container .process-pointdown-img {
+	filter: progid :   DXImageTransform .   Microsoft .  
+		BasicImage(Rotation =   1);
+	-moz-transform: rotate(90deg);
+	width: 40px;
+	height: 40px;
+	border: none;
+	margin-left: 15%;
+}
+
+#page-content .content-container .process-pointleft-img {
+	filter: progid :   DXImageTransform .   Microsoft .  
+		BasicImage(Rotation =   2);
+	-moz-transform: rotate(180deg);
+	width: 96px;
+	height: 35px;
+	border: none;
+}
+
+#page-content .content-container .process-pointup-img {
+	filter: progid :   DXImageTransform .   Microsoft .  
+		BasicImage(Rotation =   3);
+	-moz-transform: rotate(270deg);
+	width: 40px;
+	height: 40px;
+	border: none;
+	margin-left: 15%;
+}
+
+#page-content .content-container .process-outputLabel {
+	margin-left: 20%;
+	font-weight: bold;
+}
+
+.clear {
+	clear: both;
+	height: 0%;
+}
+
+#footer {
+	font: 12px; #
+	font-weight: bold;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	height: 20px;
+	text-align: center;
+	background: -moz-linear-gradient(left, #E5EBFF, #BED6F8, #E5EBFF);
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr='#E5EBFF', endColorstr='#BED6F8')"
+		;
+}
+
+#footer .copyrights {
+	height: 20px;
+	font-size: 15pt;
+	font-weight: bold;
+	margin: 0;
+	text-align: center;
+}
+
+#footer .footer-node {
+	height: 20px;
+	font-size: 15pt;
+	font-weight: bold;
+	margin: 0;
+}
+
+.panelGrid {
+	width: 900px;
+	border: 1px solid #73A8CF;
+}
+
+.datatable {
+	width: 900px;
+	height: 100%;
+}
+
+.memberQueryDataTable {
+	width: 1200px;
+	height: 100%;
+}
+
+.memberQueryPanelGrid {
+	width: 80%;
+	height: 100%;
+}
+
+/******* 单据样式  start********************************************/
+.invoiceQueryPanelGrid {
+	width: 80%;
+	border: 1px solid #73A8CF;
+}
+
+.saleInvoiceQueryPanelGrid {
+	width: 100%;
+	border: 1px solid #73A8CF;
+}
+
+.invoiceQueryDatatable {
+	width: 100%;
+	height: 100%;
+}
+
+.even-row {
+	background-color: #F2F5F9;
+}
+
+.odd-row {
+	background-color: #FCFFFE;
+}
+
+.invoiceStyleDatatable {
+	width: 100%;
+	height: 20%;
+}
+
+.invoiceDetailDatatable {
+	width: 100%;
+	height: 100%;
+}
+
+.invoiceDatatableColumn {
+	white-space: nowrap;
+}
+
+.invoiceDatatableRow {
+	white-space: nowrap;
+}
+
+.invoiceDatatablFooter {
+	white-space: nowrap;
+}
+
+.invoiceDatatableHeader {
+	white-space: nowrap;
+}
+
+.tabContentClass {
+	height: 0px;
+}
+
+/******* 单据样式  end********************************************/
+.column {
+	width: 40px;
+}
+
+.content_index {
+	border: 1px solid #CDE1E9;
+	width: 10%;
+}
+
+.content_body {
+	border: 1px solid #CDE1E9;
+}
+
+.editpanelGrid {
+	width: 100%;
+	border: 1px solid #73A8CF;
+}
+
+.styleEditpanelGrid {
+	width: 100%;
+	border: 1px solid #73A8CF;
+}
+
+.editdatatable {
+	width: 100%;
+	height: 100%;
+}
+
+.edit_content_index {
+	width: 15%;
+	border: 1px solid #CDE1E9;
+}
+
+.style_content_index {
+	width: 30%;
+	border: 1px solid #CDE1E9;
+}
+
+.style_content_body {
+	width: 50%;
+	border: 1px solid #CDE1E9;
+}
+
+.sum_content_index {
+	width: 28%;
+	border: 1px solid #CDE1E9;
+}
+
+.sum_content_body {
+	width: 72%;
+	border: 1px solid #CDE1E9;
+}
+
+.edit_content_index2 {
+	width: 30%;
+	border: 1px solid #CDE1E9;
+}
+
+.edit_content_index1 {
+	width: 15%;
+	border: 1px solid #CDE1E9;
+}
+
+.panelGridLogin {
+	width: 500px;
+}
+
+.loginCenter {
+	background:
+		url('#{facesContext.externalContext.requestContextPath}/resources/images/page-bg.png')
+		0 0 repeat-y;
+	background-position: center;
+	margin-left: 400px;
+	margin-top: 180px;
+	margin-right: 300px;
+	width: 300px;
+}
+
+.bottomRight {
+	bottom: 10px;
+	right: 10px;
+	top: auto;
+	left: auto;
+}
+
+.jfbutton {
+	width: 200px;
+}
+
+#footerText {
+	color: #999;
+}
+
+.status {
+	height: 10px
+}
+
+.invoiceDIV {
+	max-height: 150px;
+	max-width: 1000px;
+	overflow: auto;
+}
+
+.rptInvoiceDIV {
+	max-width: 1000px;
+	overflow: auto;
+}
+
+.scrollDiv {
+	max-height: 300px;
+	overflow-y: auto
+}
+
+.rptProductSumDiv {
+	max-width: 300px;
+	max-height: 500px;
+	overflow-x: auto
+}
+
+.styleScrollDiv {
+	max-height: 350px;
+	overflow-y: auto
+}
+
+.jfPopupPennel {
+	margin-left: 10%;
+	margin-top: 2%;
+}
+
+.jfInvoicePopupPennel {
+	margin-left: 5%;
+}
+
+.accordionHeader {
+	height: 15px
+}
+
+/******* 主页公告栏样式 begin********************************************/
+.noticetable {
+	border-collapse: collapse;
+	/* 关键属性：合并表格内外边框(其实表格边框有2px，外面1px，里面还有1px哦) */
+	border: dotted #999; /* 设置边框属性；样式(solid=实线)、颜色(#999=灰) */
+	border-width: 0 0 0 0; /* 设置边框状粗细：上 右 下 左 = 对应：1px 0 0 1px */
+}
+
+.noticetable td {
+	border: solid #999;
+	border-width: 0 0 1px 0;
+	padding: 2px;
+}
+
+.noticetable a:link {
+	text-decoration: none;
+	color: blue
+}
+
+.noticetable　a:active {
+	text-decoration: blink
+}
+
+.noticetable　a:hover {
+	text-decoration: underline;
+	color: red
+}
+
+.noticetable　a:visited {
+	text-decoration: none;
+	color: green
+}
+
+.noticetable div {
+	width: 200px;
+	overflow: hidden; /*不显示超过对象宽度的内容*/
+	text-overflow: ellipsis; /*当对象内文本溢出时显示省略标记（...）*/
+	white-space: nowrap; /*限制在一行内显示所有文本*/
+}
+
+.noticetable tfoot td {
+	text-align: right;
+}
+
+/******* 主页公告栏样式 end ********************************************/
+	/******* 主页公告栏样式 2begin********************************************/
+#BeautifulList {
+	width: 100%;
+	margin: 0px;
+	font-family: Tahoma, Microsoft YaHei, Verdana, Arial, Helvetica,
+		sans-serif;
+}
+
+#BeautifulList a {
+	display: block;
+	color: #555;
+	padding: 5px 10px;
+	font-size: 12px;
+	text-decoration: none;
+	height: 20px;
+	border-bottom: dotted 1px #fff;
+}
+
+#BeautifulList a:hover {
+	color: #fff;
+	background-color: #3F687E;
+	font-weight: bold;
+}
+
+#BeautifulList h1 {
+	margin: 0;
+	font-weight: bold;
+	color: #555;
+	padding: 10px;
+	font-size: 15px;
+	background-color: #F2F5F9;
+	border-bottom: dotted 1px #3F687E;
+	text-align: center;
+}
+
+/*内容*/
+#ContentItem {
+	background-color: #F2F5F9;
+	width: 100%;
+	vertical-align: middle;
+	line-height: 20px;
+}
+
+#ContentItemText {
+	width: 70%;
+	float: left;
+	height: 20px;
+	line-height: 20px;
+}
+
+#ContentItemDate {
+	width: 25%;
+	float: right;
+	font-size: 11px;
+	font-style: italic;
+	height: 20px;
+	line-height: 20px;
+}
+
+#MoreMsg {
+	color: #555;
+	margin: 0;
+	font-size: 11px;
+	padding: 5px 10px;
+	text-align: right;
+	font-style: italic;
+}
+
+/*圆角*/
+div.RoundedCorner {
+	background: #F2F5F9
+}
+
+b.rtop,b.rbottom {
+	display: block;
+	background: #FFF
+}
+
+b.rtop b,b.rbottom b {
+	display: block;
+	height: 1px;
+	overflow: hidden;
+	background: #F2F5F9
+}
+
+b.r1 {
+	margin: 0 5px
+}
+
+b.r2 {
+	margin: 0 3px
+}
+
+b.r3 {
+	margin: 0 2px
+}
+
+b.rtop b.r4,b.rbottom b.r4 {
+	margin: 0 1px;
+	height: 2px
+}
+
+/******* 主页公告栏样式2 end ********************************************/
+	/******* 主页公告栏样式 弹出框 begin********************************************/
+#MainMsg {
+	font-family: Tahoma, Microsoft YaHei, Verdana, Arial, Helvetica,
+		sans-serif;
+	color: #555;
+}
+
+#MainMsg h3 {
+	text-align: center;
+	border-bottom: dotted 1px #3F687E;
+	padding: 10px;
+	font-size: 16px;
+}
+
+#MsgPublic {
+	text-align: center;
+	font-size: 12px;
+	line-height: 0px;
+}
+
+#MsgContent {
+	font-size: 16px;
+	line-height: 25px;
+	white-space: pre-wrap;
+}
+/******* 主页公告栏样式 弹出框 end********************************************/

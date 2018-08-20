@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+
+		<p:outputPanel id="userPanel" autoUpdate="false">
+			<h:panelGrid columns="6">
+
+				<h:outputLabel value="账号:" />
+				<p:inputText id="userCode" value="#{userBB.param.userCode}" />
+				<h:outputLabel value="姓名:" />
+				<p:inputText id="userName" value="#{userBB.param.userName}" />
+
+
+				<f:facet name="footer">
+					<p:commandButton value="查询" action="#{userBB.findByPager}"
+						update="dataTableuser" process="userPanel"  rendered="#{userBB.queryable}"/>
+					<p:commandButton id="adduser" value="添加" action="#{userBB.add}"
+						update="@form:userDialog" oncomplete="PF('userDialog').show();"
+						rendered="false" />
+
+					<p:commandButton id="addeaesStyle" value="添加" process="@this"
+						action="#{userBB.add}" update="@widgetVar(userDialog)" rendered="#{userBB.addable}"
+						oncomplete="PF('userDialog').show();" />
+						
+					<p:commandButton value="导出" onclick="loadComplate();" >
+						<p:dataExporter type="xls" target="dataTableuser"
+							fileName="user" />
+					</p:commandButton>
+
+					<p:commandButton value="二维码" process="@this"  
+						oncomplete="window.open('pages/sys/user_qr.xhtml')">
+					</p:commandButton>
+					
+				</f:facet>
+			</h:panelGrid>
+			<p:dataTable id="dataTableuser" var="row" value="#{userBB.list}"
+				paginator="true" rows="#{userBB.pager.pageSize}" rowIndexVar="idx"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+				paginatorPosition="bottom">
+				<p:column headerText="#" style="width:20px">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+				<p:column headerText="操作" styleClass="process-column"  style="width:200px" exportable="false">
+					<p:commandLink id="userEditBt" value="编辑 " process="@this"
+						update="@widgetVar(userDialog)" rendered="#{userBB.editable}"
+						oncomplete="PF('userDialog').show();">
+						<f:setPropertyActionListener target="#{userBB.currentBO}"
+							value="#{row}" />
+						<f:setPropertyActionListener target="#{userBB.newPassWord}"
+							value="" />
+					</p:commandLink>
+					
+					<h:outputText value="|"  rendered="#{userBB.editable}"/>
+
+					<p:commandLink value="职位维护"
+						oncomplete="PF('userRoleDialog').show();" process="@this" rendered="#{userBB.editable}"
+						update="@widgetVar(userRoleDialog)" action="#{userBB.getUserRole}">
+						<f:setPropertyActionListener target="#{userBB.currentBO}"
+							value="#{row}" />
+					</p:commandLink>
+					
+					<h:outputText value="|"  rendered="#{userBB.deleteable}"/>
+
+					<p:commandLink value="删除 "
+						oncomplete="PF('confirmDelDialog').show();" process="@this" rendered="#{userBB.deleteable}"
+						update="@form:confirmDelDialog,@widgetVar(dataTableuser)">
+						<f:setPropertyActionListener target="#{userBB.currentBO}"
+							value="#{row}" />
+					</p:commandLink>
+
+				</p:column>
+
+				<p:column headerText="账号">
+					<h:outputText value="#{row.userCode}" />
+				</p:column>
+
+				<p:column headerText="姓名">
+					<h:outputText value="#{row.userName}" />
+				</p:column>
+				
+				<p:column headerText="工号">
+					<h:outputText value="#{row.jobNum}" />
+				</p:column>
+				
+				<p:column headerText="手机号">
+					<h:outputText value="#{row.mobile}" />
+				</p:column>
+
+				<!-- 
+				<p:column headerText="性别">
+					<h:outputText value="#{row.sex}" converter='#{userBB.sexConverter}'/>
+				</p:column>
+				
+				 -->
+			</p:dataTable>
+		</p:outputPanel>
+
+		<p:dialog header="用户编辑" draggable="true" widgetVar="userDialog"
+			minimizable="false" maximizable="false" resizable="false"
+			modal="false" id="userDialog">
+			<h:panelGrid columns="2" id="userDialogPanel"
+				widgetVar="userDialogPanel">
+				
+				<h:outputLabel value="姓名:" />
+				<p:inputText value="#{userBB.currentBO.userName}" maxlength="20" />
+
+				<h:outputLabel value="账号:" />
+				<h:panelGroup>
+					<p:inputText value="#{userBB.currentBO.userCode}" maxlength="20" />
+					<p:commandLink action="#{userBB.autoCode}" value="自动编码" process="userDialogPanel" update="userDialogPanel,@widgetVar(growl)">
+					</p:commandLink>
+				</h:panelGroup>
+
+
+				<h:outputLabel value="密码:" rendered="#{userBB.currentBO.id eq null}" />
+				<p:inputText value="#{userBB.currentBO.passWord}" maxlength="20"
+					rendered="#{userBB.currentBO.id eq null}" />
+
+				<h:outputLabel value="修改密码:"
+					rendered="#{userBB.currentBO.id ne null}" />
+				<p:inputText value="#{userBB.newPassWord}"
+					rendered="#{userBB.currentBO.id ne null}" maxlength="20" />
+
+				<h:outputLabel value="手机:" />
+				<p:inputText value="#{userBB.currentBO.mobile}" maxlength="20" />
+				<h:outputLabel value="工号:" />
+				<p:inputText value="#{userBB.currentBO.jobNum}" maxlength="30" />
+
+				<!-- 
+				<h:outputLabel value="性别:" />
+				<p:selectOneRadio value="#{userBB.currentBO.sex}">
+					<f:selectItem itemLabel="男" itemValue="1" />
+					<f:selectItem itemLabel="女" itemValue="0" />
+					<f:selectItem itemLabel="保密" itemValue="2" />
+				</p:selectOneRadio>
+			 -->
+
+
+				<f:facet name="footer">
+					<p:commandButton value="保存" action="#{userBB.save}" ajax="true"
+						process="userDialogPanel"
+						update="userDialogPanel,@widgetVar(growl),dataTableuser"
+						oncomplete="PF('userDialog').hide();" />
+					<p:commandButton value="取消" onclick="PF('userDialog').hide();" />
+				</f:facet>
+
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:dialog header="删除用户" draggable="true" widgetVar="confirmDelDialog"
+			minimizable="false" maximizable="false" resizable="false"
+			modal="false" id="confirmDelDialog">
+			<h:panelGrid>
+				<p:row>
+					<h:outputLabel value="确定删除用户:#{userBB.currentBO.userName}?" />
+				</p:row>
+				<p:row>
+					<p:commandButton value="确定" action="#{userBB.delete}"
+						process="@this" update="@widgetVar(growl),dataTableuser"
+						oncomplete="PF('confirmDelDialog').hide();" />
+					<p:commandButton value="取消"
+						onclick="PF('confirmDelDialog').hide();" />
+				</p:row>
+
+			</h:panelGrid>
+		</p:dialog>
+		
+		<p:dialog header="用户职位维护:请选中职位节点" draggable="true"
+				widgetVar="userRoleDialog" width="800" height="400"
+				minimizable="true" maximizable="true" resizable="true" onShow=""
+				modal="false" id="userRoleDialog">
+		
+				<h:panelGrid columns="1" id="userRoleDialogPanel"
+					widgetVar="userRoleDialogPanel">
+				<!-- 
+				<p:pickList   value="#{userGroupBB.userModel}"
+					var="user" effect="bounce" itemValue="#{user.id}"
+					itemLabel="#{user.userName}" showSourceControls="false"
+					showTargetControls="false" responsive="true" 
+					showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">未选中</f:facet>
+					<f:facet name="targetCaption">已选中</f:facet>
+
+					<p:column style="width:100%">
+						<h:outputText value="#{user.userCode}-#{user.userName}" />
+					</p:column>
+				</p:pickList>
+				 -->
+				<p:tree value="#{userBB.groupTree}" var="role" propagateSelectionUp="true" propagateSelectionDown="true"
+					selectionMode="checkbox" selection="#{userBB.selectedUserRole}" showUnselectableCheckbox="false">
+					<p:treeNode>
+						<h:outputText value="#{role.typeName}-#{role.groupName}" />
+					</p:treeNode>
+				</p:tree>
+
+				<f:facet name="header">
+					<p:commandButton value="保存" ajax="true"
+						process="userRoleDialog"
+						update="@widgetVar(userRoleDialog),@widgetVar(growl)"
+						actionListener="#{userBB.saveUserRole}" />
+					<p:commandButton value="关闭"
+						onclick="PF('userRoleDialog').hide();" />
+				</f:facet>
+			</h:panelGrid>
+
+			</p:dialog>
+		
+
+	</h:form>
+</html>
+

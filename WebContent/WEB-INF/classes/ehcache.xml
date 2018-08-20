@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+	<!--  设置缓存数据文件的存放目录 -->
+	<diskStore path="D:\\log\ehcache\" />
+
+	<!-- maxElementsInMemory 内存中的对象数目 
+		eternal	设置对象是否为永久的,true表示永不过期,此时将忽略timeToIdleSeconds和timeToLiveSeconds属性;
+		timeToIdleSeconds	 设置对象空闲最长时间,超过这个时间,对象过期。当对象过期时,EHCache会把它从缓存中清除。
+		如果此值为0,表示对象可以无限期地处于空闲状态。 
+		timeToLiveSeconds	 设置对象生存最长时间,超过这个时间,对象过期。如果此值为0,表示对象可以无限期地处于空闲状态。 
+		overflowToDisk		 设置基于内在的缓存中的对象数目达到上限后,是否把溢出的对象写到基于硬盘的缓存中 
+		diskExpiryThreadIntervalSeconds  磁盘失效线程运行时间间隔，默认是120秒。
+		memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是
+		LRU（最近最少使用）。可以设置为FIFO（先进先出）或是LFU（较少使用）。
+		diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。
+	-->
+	
+	<!--
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, 
+					multicastGroupAddress=230.0.0.1,   
+ 					multicastGroupPort=4446, 
+ 					timeToLive=32" />
+	 
+		cacheManagerPeerProviderFactory ehcache缓存监视器.	
+	-->
+
+	<defaultCache maxElementsInMemory="3000" eternal="false" diskPersistent="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="1200"
+		overflowToDisk="false">
+		<!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateAsynchronously=true, 
+						replicatePuts=true, 
+						replicateUpdates=true,
+						replicateUpdatesViaCopy=false, 
+						replicateRemovals=true" />-->
+	</defaultCache>
+	
+	<cache name="comItemList" maxElementsInMemory="100000" eternal="false"
+		timeToIdleSeconds="0" timeToLiveSeconds="0" diskPersistent="false"
+		overflowToDisk="false">
+		<!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateAsynchronously=true, 
+						replicatePuts=true, 
+						replicateUpdates=true,
+						replicateUpdatesViaCopy=false, 
+						replicateRemovals=true" />-->
+	</cache>
+	
+
+
+
+
+
+	<!-- 设置默认的查询缓存的数据过期策略 
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxElementsInMemory="1" eternal="false" timeToIdleSeconds="600"
+		timeToLiveSeconds="6000" overflowToDisk="true" />
+-->
+	<!-- 设置时间戳缓存的数据过期策略
+		<cache name="org.hibernate.cache.UpdateTimestampsCache" 
+		maxElementsInMemory="5"
+		eternal="true" 
+		overflowToDisk="true"/>
+	-->
+	<!-- 设置自定义命名查询缓存customerQueries的数据过期策略 
+		<cache name="myCacheRegion"
+		maxElementsInMemory="1"
+		eternal="false" 
+		timeToIdleSeconds="600" 
+		timeToLiveSeconds="6000" 
+		overflowToDisk="true"
+		/> 
+	-->
+
+
+</ehcache>
+

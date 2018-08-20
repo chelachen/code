@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jf="http://java.sun.com/jsf/composite/components">
+
+	<ui:composition>
+	
+		<h:form>
+		<div id="Info">
+			<h:panelGrid columns="2" style="line-height: 0px;" id="mainLoginInfo"> 
+			<h:panelGroup>
+	 			<a4j:commandLink styleClass="logo_a" action="#{mainBB.modifyUser}"
+				render="popupEdit"
+				oncomplete="#{rich:component('popupEdit')}.show();">
+				<h:graphicImage value="#{resource['images:funcIcon/head_user.png']}"
+					title="近7天销售情况" styleClass="head-img" />
+			</a4j:commandLink>
+			
+
+			
+			<a4j:commandLink action="#{mainBB.showBcmShop}" oncomplete="if(#{not empty mainBB.bcmUrl}){window.open('#{mainBB.bcmUrl}')}" 
+				styleClass="logo_a" id="headerShowLoginWindow">
+				<h:graphicImage value="#{resource['images:funcIcon/head_bcm.png']}"
+					title="待办任务" styleClass="head-img" />
+			</a4j:commandLink>
+			
+			 
+			
+			<a4j:commandLink styleClass="logo_a" action="#{handOversBB.initHandOvers}"
+				render="handOvers"
+				oncomplete="#{rich:component('handOvers')}.show();">
+				<h:graphicImage value="#{resource['images:funcIcon/handovers.png']}"
+					title="公告" styleClass="head-img" />
+            </a4j:commandLink>
+
+		 
+			
+			</h:panelGroup>
+			
+			</h:panelGrid>
+
+	</div>
+
+			<rich:popupPanel id="popupEdit" autosized="#{popupPanelBB.autosized}"
+				modal="#{popupPanelBB.modal}"
+				resizeable="#{popupPanelBB.resizeable}"
+				width="#{popupPanelBB.width}" height="#{popupPanelBB.height}"
+				styleClass="#{popupPanelBB.styleClass}"
+				moveable="#{popupPanelBB.moveable}" domElementAttachment="parent">
+				<f:facet name="header">
+					<h:outputText value="用户信息修改" />
+				</f:facet>
+				<f:facet name="controls">
+					<a4j:commandLink limitRender="true" render="popupEdit"
+						onclick="#{rich:component('popupEdit')}.hide(); return false;">
+						<h:graphicImage value="#{resource[popupPanelBB.closeImg]}"
+							title="关闭" styleClass="pop-close-img" />
+					</a4j:commandLink>
+				</f:facet>
+				<h:panelGrid columns="2" columnwidths="40%,50%"
+					columnClasses="edit_content_index,content_body"
+					styleClass="editpanelGrid" id="editGrid">
+					<h:outputText value="用户姓名:"></h:outputText>
+					<h:panelGroup>
+						<h:inputText value="#{mainBB.userBO.userName}" maxlength="20"
+							styleClass="jfbutton" dir="checkNotNull(用户姓名 )">
+						</h:inputText>
+						<jf:jfNotNullHint />
+					</h:panelGroup>
+					<h:outputText value="密码:" rendered="#{mainBB.userBO.id ==null}"></h:outputText>
+					<h:panelGroup rendered="#{mainBB.userBO.id ==null}">
+						<h:inputSecret value="#{mainBB.userBO.passWord}" maxlength="30"
+							styleClass="jfbutton" dir="checkNotNull(密码 )"
+							rendered="#{mainBB.userBO.id ==null}">
+						</h:inputSecret>
+						<jf:jfNotNullHint rendered="#{mainBB.userBO.id ==null}" />
+					</h:panelGroup>
+
+					<h:outputText value="修改密码:" rendered="#{!empty mainBB.userBO.id }"></h:outputText>
+					<h:inputSecret value="#{mainBB.newPassword}" maxlength="30"
+						styleClass="jfbutton" rendered="#{!empty mainBB.userBO.id }">
+					</h:inputSecret>
+					<h:outputText value="确认密码:" rendered="#{!empty mainBB.userBO.id }"></h:outputText>
+					<h:inputSecret value="#{mainBB.reNewPassword}" maxlength="30"
+						styleClass="jfbutton" rendered="#{!empty mainBB.userBO.id }">
+					</h:inputSecret>
+					<h:outputText value="性别:"></h:outputText>
+					<h:panelGrid columns="2">
+						<rich:select value="#{mainBB.userBO.sex}" defaultLabel="请选择"
+							dir="checkListBox(性别 )">
+							<f:selectItem itemValue="" itemLabel="请选择" />
+							<f:selectItems value="#{mainBB.sexList}" />
+						</rich:select>
+						<jf:jfNotNullHint />
+					</h:panelGrid>
+
+					<h:outputText value="手机:"></h:outputText>
+					<h:panelGroup>
+						<h:inputText value="#{mainBB.userBO.mobile}" maxlength="11"
+							styleClass="jfbutton"
+							dir="checkintegermobile(请输入正确的手机号码 )|checkNotNull(手机 )">
+						</h:inputText>
+						<jf:jfNotNullHint />
+					</h:panelGroup>
+
+					<h:outputText value="电子邮件:"></h:outputText>
+					<h:inputText value="#{mainBB.userBO.email}" maxlength="50"
+						styleClass="jfbutton" dir="checkemail1(电子邮件 )">
+					</h:inputText>
+
+					<h:outputText value="电话:"></h:outputText>
+					<h:inputText value="#{mainBB.userBO.tel}" maxlength="20"
+						styleClass="jfbutton"
+						dir="checkintegerphone(请按正确格式输入:区号-电话号码 7到8位 -分机号 3-4位 ! )">
+					</h:inputText>
+
+					<h:outputText value="说明:"></h:outputText>
+					<h:inputTextarea value="#{mainBB.userBO.remark}" rows="3"
+						styleClass="jfbutton" dir="maxlength(说明 ,255)"></h:inputTextarea>
+
+				</h:panelGrid>
+				<a4j:commandButton value="#{msgs.PSSMIS_SAVE}"
+					action="#{mainBB.saveUser}" execute="popupEdit"
+					onclick="return validator(this.form);"
+					oncomplete="#{rich:component('popupEdit')}.show();" />
+
+				<a4j:commandButton value="#{msgs.PSSMIS_CLOSE}" limitRender="true"
+					render="popupEdit"
+					onclick="#{rich:component('popupEdit')}.hide(); return false;" />
+
+			</rich:popupPanel>
+			<ui:include src="/pages/smm/handOvers.xhtml" />
+		</h:form>
+	</ui:composition>
+
+</html>

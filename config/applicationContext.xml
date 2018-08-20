@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- 依次导入数据源、HIBERNATE连接、AOP事务控制、DAO层、SERVICE层、UCC层 、freemarker模板-->
+	<import resource="classpath:applicationContext-datasource.xml"/>
+	
+	<import resource="classpath:applicationContext-hibernate.xml"/>
+	
+	<import resource="classpath:applicationContext-transaction.xml"/>
+	
+	<import resource="classpath:applicationContext-inject.xml"/>
+	
+
+</beans>

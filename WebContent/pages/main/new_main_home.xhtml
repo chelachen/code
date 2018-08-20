@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition>
+	<h:form>
+	<h:panelGroup id="mainAllPanelGroup"  widgetVar="mainAllPanelGroup">
+		<!-- 列出所有模块功能 -->
+		<h:panelGroup id="mainOnePanelGroup" widgetVar="mainOnePanelGroup"
+			rendered="#{mainBB.mainOnePanelGroup}">
+			<div
+				style="padding-top:20px; padding-left:35px; width:95%;height:455px;writing-mode: tb-lr;">
+				<c:forEach items="#{mainBB.moduleList}" var="md">
+					<c:forEach items="#{md.moduleFunctions}" var="mf">
+						<li class="liClass"
+							style="display:inline-block;width:60px;height:100px;writing-mode: lr-tb;">
+							<div id="navi1">
+								<c:if test="#{mf.functionType==0}">
+								<p:commandLink action="#{mainBB.doClickNew}" ajax="true"
+									update="@form:@parent:mainForm:mainPanelGrid" >
+									<h:graphicImage value="#{resource[mf.iconUrlBig]}"
+										styleClass="new-func-img" />
+									<f:setPropertyActionListener target="#{mainBB.currentItem}" value="#{mf.functionCode}" />
+									<h:outputText value="#{mf.functionName}" ></h:outputText>
+								</p:commandLink>
+								</c:if>
+								<c:if test="#{mf.functionType==1}">
+								<p:commandLink process="@this"  
+									oncomplete="window.open('#{mf.functionSrc}')" >
+								
+								 <h:graphicImage value="#{resource[mf.iconUrlBig]}"
+									styleClass="new-func-img" />	
+								<h:outputText value="#{mf.functionName}" ></h:outputText>
+							</p:commandLink>
+							</c:if>
+							</div>
+							</li>
+					</c:forEach>
+				</c:forEach>
+			</div>
+			<script>
+				(function() {
+					var l = $('.liClass');
+					l.css('height', ($('#center').height() - 20) / 4);
+				})()
+			</script>
+		</h:panelGroup>
+
+		<!-- 列出当前模块功能 -->
+		<h:panelGroup id="mainTowPanelGroup" widgetVar="mainTowPanelGroup"
+			rendered="#{mainBB.mainTowPanelGroup}">
+			<div class="div1" id="navi" width="100%">
+				<ui class="ui1"> <c:forEach
+					items="#{mainBB.currentModuleBO.moduleFunctions}" var="mf">
+
+					<li class="liClass"
+						style="display:inline-block;width:60px;height:100px;writing-mode: lr-tb;">
+						<div id="navi1">
+							<c:if test="#{mf.functionType==0}">
+							<p:commandLink action="#{mainBB.doClickNew}" ajax="true"
+								 update="@form:@parent:mainForm:mainPanelGrid">
+								<h:graphicImage value="#{resource[mf.iconUrlBig]}"
+									styleClass="new-func-img" />	
+								<f:setPropertyActionListener target="#{mainBB.currentItem}" value="#{mf.functionCode}" />
+								<h:outputText value="#{mf.functionName}" ></h:outputText>
+							</p:commandLink>
+							</c:if>
+							<c:if test="#{mf.functionType==1}">
+								<p:commandLink  process="@this"  
+									oncomplete="window.open('#{mf.functionSrc}')">
+								 <h:graphicImage value="#{resource[mf.iconUrlBig]}"
+									styleClass="new-func-img" />	
+								<h:outputText value="#{mf.functionName}" ></h:outputText>
+							</p:commandLink>
+							</c:if>
+						</div>
+					</li>
+
+				</c:forEach> 
+				</ui>
+			</div>
+		</h:panelGroup>
+		
+		<script>
+			function iswidthsz() {
+				var sl = $('#navi li').length;
+				var ck = $('#center').width();
+				//alert(ck)
+				$('#navi').css({
+					width : ck - 55
+				})
+				var l = $('.liClass');
+				$('#navi li').css({
+					'height' : (($('#center').height() - 20) / 4)
+				});
+			}
+			iswidthsz();
+			//renwulan()
+		</script>
+	</h:panelGroup>
+	</h:form>
+</ui:composition>
+
+</html>

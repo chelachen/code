@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+<f:view contentType="text/html">
+	<h:head>
+		<title>#{loginBB.systemTitle}</title>
+		<!-- -->
+		<link rel="stylesheet" 
+			href="assets/css/reset.css?#{mainBB.systemVersion}" />
+		<link rel="stylesheet"
+			href="assets/css/desktop.css?#{mainBB.systemVersion}" /> 
+		<link rel="stylesheet"
+			href="assets/css/scroll.css?#{mainBB.systemVersion}" />
+		<link rel="stylesheet"
+			href="assets/css/tipswindown.css?#{mainBB.systemVersion}" />
+		<h:outputStylesheet>
+			@import url('./resources/css/application.css?#{mainBB.systemVersion}')
+		</h:outputStylesheet>
+		 
+		<script src="resources/js/validator.js?#{mainBB.systemVersion}"
+			language="javascript" type="text/javascript"></script>
+
+		<link rel="shortcut icon" href="resources/images/favicon.ico" />
+	</h:head>
+	<h:body>
+		<div id="mew_page">
+			<div id="logo">
+				<div id="logo-img" style="margin-top: 17px;">e服宝</div>
+				<div class="page-memu">
+					<ui:insert name="page-memu" />
+				</div>
+				<div id="logo-img-new" style="margin-top: -40px;margin-left:93%;">
+					<ui:insert name="page-memu-task" />
+				</div>
+				<div id="logo-img-new2" style="margin-top: -40px;margin-left:70%;">
+					<ui:insert name="page-memu-task-warn" />
+				</div>
+				<div class="login_info">
+					<ui:insert name="login_info" />
+				</div>
+			</div>
+
+			<div id="page-content" class="page-content">
+				<div id="left" class="left-menu-new">
+					<ui:insert name="left-menu" />
+				</div>
+				<!-- 
+				<h:panelGroup id="paneltotal">
+					<h:panelGroup rendered="#{mainBB.currentName != ''}">
+						<div style="position: relative; top: -18px;">
+							<div id="memuDIV">
+								<div id="memuDIV1">
+									<h:outputText value="#{mainBB.currentName}"
+										style="padding-left: 12px;"></h:outputText>
+								</div>
+								
+								<h:form>
+									<div style="margin-left: 158px; margin-top: -17px">
+										<h:panelGroup id="panelminimize">
+											<a4j:commandLink limitRender="true"
+												render="mainAllPanelGroup,mainPanelGrid,newPanelGrid,paneltotal"
+												rendered="#{mainBB.currentItem != ''}"
+												action="#{mainBB.changeMemuTab}">
+												<h:graphicImage style="width:15px;height: 15px;" title="最小化"
+													value="#{resource['images:icons/minimize1.png']}"></h:graphicImage>
+												<f:setPropertyActionListener target="#{mainBB.seleteTab}"
+													value="firstTab" />
+												<f:setPropertyActionListener
+													target="#{mainBB.mainContentPage}"
+													value="/pages/main/sections/new_main_home.xhtml" />
+												<f:setPropertyActionListener
+													target="#{mainBB.mainOnePanelGroup}" value="false" />
+												<f:setPropertyActionListener
+													target="#{mainBB.mainTowPanelGroup}" value="true" />
+												<f:setPropertyActionListener
+													target="#{mainBB.mainThreePanelGroup}" value="false" />
+											</a4j:commandLink>
+										</h:panelGroup>
+									</div>
+									<div style="margin-left: 178px; margin-top: -15px">
+										<h:panelGroup id="panelclose">
+											<a4j:commandLink limitRender="true"
+												rendered="#{mainBB.currentItem != ''}"
+												render="mainPanelGrid,newPanelGrid,paneltotal,salesControlPanel">
+												<h:graphicImage value="#{resource['images:icons/d4.png']}"
+													style="width: 15px;height: 15px;"
+													action="#{mainBB.changeTab}" class="left-im" title="关闭"
+													styleClass="close-img" />
+												<f:setPropertyActionListener target="#{mainBB.isDel}"
+													value="#{mainBB.currentItem}" />
+											</a4j:commandLink>
+										</h:panelGroup>
+									</div>
+								</h:form>
+								
+							</div>
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
+				-->
+				<div id="center" class="content-container-new">
+					<ui:insert name="page-content" />
+				</div>
+			</div>
+
+		</div>
+	
+				<div id="footer">
+
+				<h:form>
+				<p:commandLink id="dynaButton"  icon="#{resource['images:start_second.png']}"   >
+					<h:graphicImage value="#{resource['images:start_second.png']}"  />
+				</p:commandLink>
+				
+				<p:overlayPanel id="imagePanel" for="dynaButton" hideEffect="fade" dynamic="true" >	
+					<p:commandLink action="#{mainBB.logout}" styleClass="logo_a"
+									style="padding-right: 10px;">
+									<h:graphicImage
+										value="#{resource['images:logout.png']}"
+										title="登出系统" styleClass="head-img" />
+									&thinsp;
+									<span class="wordimg" style="margin-left: 2px;">登出系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</p:commandLink>
+        		</p:overlayPanel>
+
+
+    		</h:form>
+		
+		<div class="copyright" sytle="text-align:center;">
+			<h:outputLabel style="position: fixed;bottom: 2px;left:110px;"
+				value="当前用户：#{mainBB.userName}" />
+			 
+		</div>
+    	
+    </div>
+	</h:body>
+ 
+
+	<h:form>
+		<p:dialog header="用户信息修改" draggable="true" widgetVar="userEditDialog"
+			minimizable="false" maximizable="false" resizable="false"
+			modal="false" id="userEditDialog">
+			<h:panelGrid columns="2" id="userDialogEditPanel"
+				widgetVar="userDialogEditPanel">
+				<h:outputLabel value="姓名:" />
+				<h:outputLabel value="#{userBB.loginBO.userName}" />
+
+				<h:outputLabel value="用户名:" />
+				<h:outputLabel value="#{userBB.loginBO.userCode}" />
+
+				<h:outputLabel value="修改密码:" />
+				<p:password value="#{userBB.newPassWord}" maxlength="20" />
+
+				<h:outputLabel value="手机:" />
+				<p:inputText value="#{userBB.loginBO.mobile}" maxlength="20" />
+
+				<f:facet name="footer">
+					<p:commandButton value="保存" action="#{userBB.updateUserInfo}"
+						ajax="true" process="userDialogEditPanel,@this"
+						update="userDialogEditPanel,@widgetVar(growl)"
+						oncomplete="PF('userEditDialog').hide();" />
+					<p:commandButton value="取消" onclick="PF('userEditDialog').hide();" />
+				</f:facet>
+			</h:panelGrid>
+
+		</p:dialog>
+
+	</h:form>
+</f:view>
+</html>

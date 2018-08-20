@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<!-- outMsg  value="0/10 0 0 * * ?" 10S企业号自动发送-->
+	<bean id="sendWxQy"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="intJob" />
+		<property name="targetMethod" value="sendQyMsg" />
+	</bean>
+
+	<bean id="sendWxQyTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="sendWxQy" />
+		<property name="cronExpression" value="0/10 * * * * ?" />
+	</bean>
+	
+	<bean autowire="default" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 企业号消息发送
+				<ref bean="sendWxQyTrigger" />-->
+			</list>
+		</property>
+	</bean>
+	
+</beans>

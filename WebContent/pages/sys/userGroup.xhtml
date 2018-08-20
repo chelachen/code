@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<p:outputPanel id="userPanel" autoUpdate="false">
+			<h:panelGrid columns="2" id="userGrouppanelGrid"
+				widgetVar="userGrouppanelGrid">
+
+				<p:tree value="#{userGroupBB.groupTree}" var="data" dynamic="true"
+					id="userGrouptree" selectionMode="single" orientation="vertical"
+					selection="#{userGroupBB.selectedData}">
+					<p:treeNode expanded="#{true}">
+						<h:outputText value="#{data.typeName}-#{data.groupName}" />
+					</p:treeNode>
+				</p:tree>
+				<h:panelGrid columns="1" id="userGroupDialogPanel"
+					widgetVar="userGroupDialogPanel">
+					<h:outputText value="操作指南：1、点击树节点；2、右键选择操作；3、修改并保存" />
+					<h:outputText />
+
+					<h:panelGroup>
+						<h:outputLabel value="名称:" />
+						<p:inputText value="#{userGroupBB.currentBO.groupName}"
+							dir="checkNotNull(名称 )" maxlength="20" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:outputLabel value="类型:" />
+						<p:selectOneMenu value="#{userGroupBB.currentBO.type}"
+							style="width:160px">
+							<f:selectItem itemLabel="请选择" itemValue="0" />
+							<f:selectItems value="#{userGroupBB.typeList}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<f:facet name="footer">
+						<p:commandButton value="保存" action="#{userGroupBB.save}"
+							ajax="true" process="userGroupDialogPanel"
+							onclick="return validator(this.form);"
+							update="userGrouptree,@widgetVar(growl)" />
+						<p:commandButton value="刷新" action="#{userGroupBB.init}"
+							ajax="true" update="userGrouptree" />
+					</f:facet>
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<p:contextMenu for="userGrouptree">
+				<p:menuitem value="修改" process="@widgetVar(userGrouptree)"
+					update="userGroupDialogPanel,@widgetVar(growl)"
+					actionListener="#{userGroupBB.update}" icon="ui-icon-disk" />
+				<p:menuitem value="添加" process="@widgetVar(userGrouptree)"
+					update="userGroupDialogPanel,@widgetVar(growl)"
+					actionListener="#{userGroupBB.add}" icon="ui-icon-arrowrefresh-1-w" />
+				<p:menuitem value="删除" process="@widgetVar(userGrouppanelGrid}"
+					update="userGrouptree,@widgetVar(growl)"
+					actionListener="#{userGroupBB.delete}" icon="ui-icon-close" />
+
+				<p:menuitem value="成员维护" process="@widgetVar(userGrouptree)"
+					update="userGroupMemberDialog,@widgetVar(growl)"
+					actionListener="#{userGroupBB.changeUsers}" icon="ui-icon-disk"
+					oncomplete="PF('userGroupMemberDialog').show();" />
+				<p:menuitem value="权限设置" process="@widgetVar(userGrouptree)"
+					update="userGroupRightDialog,@widgetVar(growl)"
+					actionListener="#{userGroupBB.changeRights}" icon="ui-icon-disk"
+					oncomplete="PF('userGroupRightDialog').show();" />
+
+			</p:contextMenu>
+		</p:outputPanel>
+
+
+		<p:dialog header="成员维护" draggable="true"
+			widgetVar="userGroupMemberDialog" minimizable="true"
+			maximizable="true" resizable="true" modal="false"
+			id="userGroupMemberDialog">
+			<h:panelGrid columns="1" id="userGroupMemberDialogPanel"
+				widgetVar="userGroupMemberDialogPanel">
+
+				<p:pickList id="PojoPickList" value="#{userGroupBB.userModel}"
+					var="user" effect="bounce" itemValue="#{user.id}"
+					itemLabel="#{user.userName}" showSourceControls="false"
+					showTargetControls="false" responsive="true" 
+					showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">未选中</f:facet>
+					<f:facet name="targetCaption">已选中</f:facet>
+
+					<p:column style="width:100%">
+						<h:outputText value="#{user.userCode}-#{user.userName}" />
+					</p:column>
+				</p:pickList>
+
+				<f:facet name="footer">
+					<p:commandButton value="保存" action="#{userGroupBB.saveGroupUser}"
+						ajax="true" process="userGroupMemberDialogPanel"
+						update="@widgetVar(growl)" />
+					<p:commandButton value="关闭"
+						onclick="PF('userGroupMemberDialog').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+		
+		 
+		<p:dialog header="权限设置" draggable="true"
+			widgetVar="userGroupRightDialog" minimizable="true"
+			maximizable="true" resizable="true" modal="false"
+			id="userGroupRightDialog">
+			<h:panelGrid columns="1" id="userGroupRightDialogPanel"
+				widgetVar="userGroupRightDialogPanel">
+
+				<p:pickList id="userGroupRightPickList" value="#{userGroupBB.funcRightsModel}"
+					var="righs" effect="bounce" itemValue="#{righs.id}"
+					itemLabel="#{righs.rightsName}" showSourceControls="false"
+					showTargetControls="false" responsive="true" style="width:800px;"
+					showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">未配权限</f:facet>
+					<f:facet name="targetCaption">已配权限</f:facet>
+
+					<p:column style="width:100%">
+						<h:outputText value="#{righs.rightsName}" />
+					</p:column>
+				</p:pickList>
+			
+
+				<f:facet name="footer">
+					<p:commandButton value="保存" action="#{userGroupBB.saveGroupUserRights}"
+						ajax="true" process="userGroupRightDialogPanel"
+						update="@widgetVar(growl)" />
+					<p:commandButton value="关闭"
+						onclick="PF('userGroupRightDialog').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+		 
+	
+	</h:form>
+</html>
+

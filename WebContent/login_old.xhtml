@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<f:view contentType="text/html">
+	<h:head>
+			<title>#{loginBB.systemTitle}</title>
+			<script src="resources/js/validator.js" language="javascript"
+				type="text/javascript">
+			</script>
+			<link rel="shortcut icon" href="resources/images/favicon.ico" />
+		</h:head>
+	<body >
+		<p:layout fullPage="true">
+		<p:layoutUnit position="center"  >
+
+
+	<h:form id="LoginForm" >
+
+		<p:growl id="logingrowl" showDetail="false" sticky="false" widgetVar="logingrowl" />
+		<p:dialog header="e模宝-登录窗口" draggable="true" widgetVar="loginWin"
+			modal="false" visible="true" id="loginWin"
+			showEffect="fade" hideEffect="fade" closable="false">
+
+			<h:panelGrid columns="3" id="loginPanel">
+				<h:outputLabel for="userCode" value="账号:" />
+				<p:inputText id="userCode" value="#{loginBB.param.userCode}"
+					label="账号" required="true">
+				</p:inputText>
+				<p:message for="userCode" />
+
+				<h:outputLabel for="password" value="密码:" />
+				<p:password id="password" value="#{loginBB.param.passWord}"
+					label="密码" required="true" feedback="false" />
+				<p:message for="password" />
+			</h:panelGrid>
+
+			<p:commandButton id="btnLogin" update="loginWin,@widgetVar(logingrowl)" onclick="screens()"
+				process="loginWin,invoiceWidth,invoiceHeight"  value="登录" action="#{loginBB.login}" ajax="true" />
+
+		</p:dialog>
+		<h:inputHidden id="invoiceWidth" value="#{loginBB.invoiceWidth}"></h:inputHidden>
+		<h:inputHidden id="invoiceHeight" value="#{loginBB.invoiceHeight}"></h:inputHidden>
+	</h:form>
+			</p:layoutUnit>
+	</p:layout>
+	</body>
+	</f:view>
+</html>
+

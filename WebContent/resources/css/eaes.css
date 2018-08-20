@@ -1,0 +1,199 @@
+/* 头部begin----------------------------------*/
+.north-layout-unit {
+	border: none;
+}
+
+.header-container {
+	text-align: center;
+	font-size: 25px;
+	font-weight: 600;
+}
+
+.schedule{
+	 width: 50px;
+	
+}
+
+.ui-clock{
+border-radius: 10px !important;
+
+}
+
+.ui-growl {
+top:500px;
+}
+
+.ui-stack { bottom: 0px; left: 5px; }
+
+.alloy_start_button_container {
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 50px;
+}
+
+.alloy_start_button {
+    background: url("../images/start_second.png") no-repeat scroll 0px 0px transparent;
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    left: 2px;
+    position: absolute;
+    top: 41px;
+    width: 100px;
+    z-index: 10;
+}
+
+
+/* 头部end----------------------------------*/
+	/* 左侧部分begin----------------------------------*/
+.left-ui-accordion .ui-accordion-header{
+
+}
+	
+.left-ui-accordion .ui-accordion-content {
+	padding: 0px;
+	overflow: visible;
+	margin-bottom: 10px;
+	margin-top: 2px;
+	margin: 2px auto 10px;
+
+}
+
+.left-ui-accordion .ui-menu {
+	width: 94%;
+	background: none;
+	border: none;
+}
+
+.left-ui-accordion li a {
+	font-size: 15px;
+}
+
+.left-ui-accordion li a span {
+	margin-left: 25px;
+}
+
+/* 左侧部分end----------------------------------*/
+	/* 下部begin----------------------------------*/
+.north-layout-unit {
+	border: none;
+}
+
+.footer-container {
+	text-align: center;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+/* 下部分end----------------------------------*/
+	/* 内容部分begin----------------------------------*/
+.center-layout-unit {
+	padding: 0px;
+}
+
+.center-layout-unit	.ui-layout-unit-content {
+	padding: 0px;
+}
+
+.main-contentTab {
+	border: none;
+	padding: 0px;
+}
+
+.main-contentTab .ui-tabs-nav li a {
+	font-size: 14px;
+}
+
+.process-column {
+	text-align: center;
+	width:100px;
+}
+.ui-tree{
+	width:240px;
+	}
+.ui-autocomplete button{
+	bottom: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+	}
+.ui-autocomplete input{
+    width:73%;
+	}
+.ui-autocomplete{
+	display: inline-block;
+	position: relative;
+	}
+/* 内容部分end----------------------------------*/
+
+#logout {
+	 background:no-repeat scroll 0px 0px transparent;
+	font: 12px;
+	font-weight: bold;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 25px;
+	background: -moz-linear-gradient(left, #E5EBFF, #BED6F8, #E5EBFF);
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr='#E5EBFF', endColorstr='#BED6F8')";
+}
+
+.abs {
+  top: -42px;
+  left: -3px;
+  right: auto;
+  bottom: auto;
+  color: #333333; 
+  /*font: 12px/1.5 tahoma,helvetica,clean,sans-serif;*/
+}
+
+
+.showdiv{
+	left: 84%;
+}
+#memuDIV-task {
+	 background:no-repeat scroll 0px 0px transparent;
+    position: absolute;
+	bottom:3px;
+	left:5px;
+ 	width:30px	;
+	height:30px;
+}
+
+
+.showdivuser{
+	left: 84%;
+}
+#memuDIV-user {
+    position: absolute;
+	z-index: 1;
+	bottom:3px;
+	left:45px;
+ 	width:30px	;
+	height:30px;
+}
+
+.datatablePanelGrid {
+	width: 100%;
+	border: 0px solid #73A8CF;
+}
+
+.content_index {
+	text-align:right
+	width: 50%;
+}
+
+.content_body {
+	width: 50%;
+}
+ 
+.ui-datatable-odd {
+    background: #ffffff;
+}
+
+.ui-datatable-even {
+    background: #F2F5F9;
+}

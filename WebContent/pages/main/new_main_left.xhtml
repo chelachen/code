@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<h:form>
+	<li class="liClass1">
+		<h:panelGrid columns="1"  id="mainLeftPanelGrid">
+			<!-- 
+			<c:forEach items="#{mainBB.shortcutList}" var="sc">
+				<a4j:commandLink action="#{mainBB.doClickNew}">
+					<h:graphicImage value="#{resource[sc.iconUrlBig]}"
+						 styleClass="new-left-img" />
+					<h:outputText value="#{sc.functionName}" ></h:outputText> 	
+					<f:setPropertyActionListener target="#{mainBB.currentItem}"
+						value="#{sc.functionCode}" />
+				</a4j:commandLink>
+			</c:forEach>
+			 -->
+	<script>
+	$(function(){
+		var h=$('#center').height()+9;
+		$('#page-content .left-menu-new').css({height:h})
+		if($('#left td').length>4){
+			$('#left td').css('height',h/5)
+		}
+	})
+	</script>
+		</h:panelGrid>
+			<h:panelGroup  styleClass="bottom">
+			 
+			</h:panelGroup>
+
+ 	</li>
+ 	<!--
+ 	<ui:include src="/pages/main/sections/main_shortcut.xhtml" />
+ 	-->
+	</h:form>
+</ui:composition>

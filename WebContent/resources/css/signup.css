@@ -1,0 +1,45 @@
+*{ margin:0; padding:0;}
+html{
+    height:100%;
+}
+
+body,input,button,a{ font-family:"微软雅黑";text-decoration:none;}
+body{background:#000000;
+	background: -moz-linear-gradient(top, #265a63 0%, #E5EBFF 20%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#265a63), color-stop(100%,#E5EBFF));
+    background: -webkit-linear-gradient(top,  #265a63 0%,#E5EBFF 100%);
+    background: -o-linear-gradient(top,  #265a63 0%,#E5EBFF 100%);
+    background: -ms-linear-gradient(top,  #265a63 0%,#E5EBFF 100%);
+    background: linear-gradient(to bottom,  #265a63 0%,#E5EBFF 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#265a63', endColorstr='#E5EBFF')"}
+li{ list-style:none;}
+img{ border:0; color:#666; font-size:14px; line-height:24px;}
+h1,h2,h3,h4{ font-size:20px; font-weight:140; color:#333;}
+textarea,input[type="text"],input[type="password"]{ outline:none; font-size:14px;font-family:"微软雅黑";}
+
+
+
+.LoginBody{ width:852px;overflow:hidden; margin:100px auto; margin-bottom:0; background-position:484px center; padding:20px 40px; border-radius:10px; box-shadow:0 4px 0 #C1C1C1; border:1px solid #CCC;}
+.LoginBody .logo{background:url(../resources/images/login/login_logo.png) no-repeat center; height:31px; position:absolute; width:113px;}
+.LoginBody .logo.xz{ width:auto; position:inherit;}
+body.LoginB{ background:#74C1E7;}
+.yj{ border-radius:5px; box-shadow:0 2px 0px #CCC;border:1px #ccc solid;}
+
+.tyAn{ display:inline-block; line-height:30px; height:30px; padding:0 15px; font-size:14px; color:#fff !important; box-shadow:0 3px 0 #208DB3; border-radius:5px; background:#0bbbdf; }
+ 
+
+
+.signinBody{ background:#fff; width:436px; margin-top:150px; margin-bottom:0;}
+.signinBody h1{ font-size:26px; color:#1199DF; border-bottom:#ccc solid 1px; padding-left:15px; padding-bottom:10px; margin-bottom:20px; text-align:center;}
+.signinBody .zh,.signinBody .mm,.signinBody .yz{ overflow:hidden; padding-bottom:20px; padding-left:15px; font-size:16px; line-height:35px;}
+.signinBody .zh label,.signinBody .mm label,.signinBody .yz label{ float:left; width:80px;}
+.signinBody .zh label span,.signinBody .mm label span{ margin:0 9px;}
+.signinBody .zh input,.signinBody .mm input,.signinBody .yz input{ width:310px; background:#fff; height:35px; padding-left:10px;}
+.signinBody .yz input{ width:233px; float:left;}
+.signinBody .yz img{ margin:5px 0 0 10px;}
+.signinBody .dr{ text-align:center;}
+.signinBody .tyAn{ margin:0 10px;}
+.signinBody .zc{box-shadow: 0 3px 0 #2FAC4B;background: #4BCB7C;}
+
+.foot{ text-align:center; padding:30px 0; font-size:14px; color:#333;margin-bottom:0;}
+.foot a{ font-size:14px; color:#333; text-decoration:underline;}

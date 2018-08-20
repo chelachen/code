@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<title>#{loginBB.systemTitle}</title>
+		<link rel="stylesheet"
+			href="assets/css/reset.css?#{mainBB.systemVersion}" />
+		<link rel="stylesheet"
+			href="assets/css/desktop.css?#{mainBB.systemVersion}" />
+		<link rel="stylesheet"
+			href="assets/css/scroll.css?#{mainBB.systemVersion}" />
+		<link rel="stylesheet"
+			href="assets/css/tipswindown.css?#{mainBB.systemVersion}" />
+		<script src="resources/js/validator.js?#{mainBB.systemVersion}"
+			language="javascript" type="text/javascript"></script>
+		<h:outputScript library="js" name="locale.js" />
+		<h:outputStylesheet>
+			@import url('./resources/css/application.css?#{mainBB.systemVersion}')
+			</h:outputStylesheet>	
+
+
+		<link rel="shortcut icon" href="resources/images/favicon.ico" />
+		
+		 
+	</h:head>
+	<body>
+		<p:layout fullPage="true">
+		
+			<p:layoutUnit position="north" size="100" resizable="false"
+					closable="false" collapsible="false" styleClass="north-layout-unit">
+					<ui:include src="/main_menu.xhtml" />
+			</p:layoutUnit>
+		
+
+
+			<p:layoutUnit position="west" size="190" header=" e模宝"  
+				closable="false" collapsible="true">
+				<ui:include src="main_left.xhtml"></ui:include>
+
+			</p:layoutUnit>
+			<p:layoutUnit position="center" id="main_center"
+				styleClass="center-layout-unit">
+				<ui:include src="main_center.xhtml"></ui:include>
+
+			</p:layoutUnit>
+		</p:layout>
+		<f:facet name="last">
+			<link rel="shortcut icon" href="resources/images/favicon.ico" />
+			<h:outputStylesheet library="css" name="eaes.css" />
+		
+		</f:facet>
+		<!-- timeout="7200000" 两个个小时没动 则弹出此提示 -->
+		<p:idleMonitor onidle="PF('idleDialog').show();" timeout="7200000" />
+		<p:dialog header="您太久没操作了，登录超时，重新登录？" widgetVar="idleDialog"
+			modal="true">
+			<p:button onclick="document.location.href = document.location.href;"
+				value="确定" />
+		</p:dialog>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        			<p:commandButton value="确认" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        			<p:commandButton value="取消" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+   			</p:confirmDialog>
+		<h:form>
+
+			<!-- 	
+			<p:commandLink   id="startButton" ltitle="开始">
+				<div id="memuDIV-task" 
+				style="background-image:url(#{resource['images:start_second.png']}) ;">
+					</div>
+		</p:commandLink>
+
+
+		  <p:menu overlay="true"  trigger="startButton" my="left bottom" at="left bottom">
+		  
+            <p:menuitem value="Save"  icon="ui-icon-disk"/>
+            <p:menuitem value="Update"   icon="ui-icon-arrowrefresh-1-w"/>
+            
+    	</p:menu>
+ -->
+
+
+			<p:commandLink styleClass="showdiv"
+				onclick="PF('logoutDialog').show();" limitRender="true" title="登出">
+				<div id="memuDIV-task"
+					style="background-image:url(#{resource['images:logout.png']});">
+				</div>
+			</p:commandLink>
+
+			<p:commandLink styleClass="showdivuser"
+				action="#{userBB.editCurUser}" limitRender="true" title="用户信息修改"
+				oncomplete="PF('userEditDialog').show();" update="userEditDialog"
+				process="@this">
+				<div id="memuDIV-user"
+					style="background-image:url(#{resource['images:head_user.png']});">
+				</div>
+			</p:commandLink>
+
+			<p:dialog header="您确定要退出系统？" widgetVar="logoutDialog" modal="true">
+				<p:commandButton action="#{mainOldBB.logout}" value="确定" />
+				<h:outputLabel value="   " />
+				<p:commandButton value="取消" onclick="PF('logoutDialog').hide();" />
+			</p:dialog>
+
+			<p:dialog header="用户信息修改" draggable="true" widgetVar="userEditDialog"
+				minimizable="false" maximizable="false" resizable="false"
+				modal="false" id="userEditDialog">
+				<h:panelGrid columns="2" id="userDialogEditPanel"
+					widgetVar="userDialogEditPanel">
+					<h:outputLabel value="姓名:" />
+					<h:outputLabel value="#{userBB.loginBO.userName}" />
+
+					<h:outputLabel value="用户名:" />
+					<h:outputLabel value="#{userBB.loginBO.userCode}" />
+
+					<h:outputLabel value="修改密码:" />
+					<p:password value="#{userBB.newPassWord}" maxlength="20" />
+
+					<h:outputLabel value="手机:" />
+					<p:inputText value="#{userBB.loginBO.mobile}" maxlength="20" />
+
+					<f:facet name="footer">
+						<p:commandButton value="保存" action="#{userBB.updateUserInfo}"
+							ajax="true" process="userDialogEditPanel,@this"
+							update="userDialogEditPanel,@widgetVar(growl)"
+							oncomplete="PF('userEditDialog').hide();" />
+						<p:commandButton value="取消" onclick="PF('userEditDialog').hide();" />
+					</f:facet>
+				</h:panelGrid>
+
+			</p:dialog>
+
+		</h:form>
+	</body>
+
+</f:view>
+
+</html>

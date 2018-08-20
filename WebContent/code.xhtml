@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view contentType="text/html">
+	<h:head>
+		<title>代码生成器</title>
+		<link rel="shortcut icon" href="resources/images/favicon.ico" />
+	</h:head>
+	<body>
+		<p:growl id="growl" showDetail="false" sticky="false"
+			widgetVar="growl" />
+		<h:form>
+			<h:panelGrid columns="6" id="codePanel" widgetVar="codePanel">
+				<h:outputText value="类名:"></h:outputText>
+				<p:inputText value="#{codeBB.param.className}"></p:inputText>
+				<h:outputText value="描述:"></h:outputText>
+				<p:inputText value="#{codeBB.param.memo}"></p:inputText>
+				<h:panelGroup>
+					<p:commandButton value="查询" action="#{codeBB.findByPager}"
+						update="dataTableCode,codePanel,@widgetVar(growl)"
+						process="codePanel" />
+					<p:commandButton value="添加类" action="#{codeBB.add}"
+						update="dataTableCode,codePanel,codeDialog,@widgetVar(growl)"
+						oncomplete="PF('codeDialog').show();" process="codePanel,@this" />
+
+				<h:outputText value="默认包路径:"></h:outputText>
+				<p:inputText value="#{codeBB.defaultBagName}"></p:inputText>
+				</h:panelGroup>
+				
+			</h:panelGrid>
+
+			<p:dataTable id="dataTableCode" widgetVar="dataTableCode" var="row"
+				resizableColumns="true" value="#{codeBB.resultList}"
+				scrollable="true" scrollHeight="200" selectionMode="single"
+				rowKey="#{row.id}" paginator="false"
+				rowIndexVar="idx"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+				paginatorPosition="bottom">
+				<p:ajax event="rowSelect" listener="#{codeBB.onCodeSelect}" process="dataTableCode"
+					update="@widgetVar(codeDialog),@widgetVar(dataTableCodeDtl)" />
+				<p:column headerText="#" style="width:30px">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+
+				<p:column headerText="序号" style="width:50px">
+					<h:outputText value="#{row.num}" />
+				</p:column>
+
+				<p:column headerText="描述">
+					<h:outputText value="#{row.memo}" />
+				</p:column>
+				<p:column headerText="类名">
+					<h:outputText value="#{row.className}" />
+				</p:column>
+				<p:column headerText="表名">
+					<h:outputText value="#{row.tableName}" />
+				</p:column>
+				<p:column headerText="包路径">
+					<h:outputText value="#{row.bagName}" />
+				</p:column>
+
+				<p:column headerText="模块简拼" style="width:80px">
+					<h:outputText value="#{row.mdName}" />
+				</p:column>
+
+
+				<p:column headerText="操作" styleClass="process-column">
+					<p:commandLink id="codeEditBt" value="编辑 " process="@this"
+						update="@widgetVar(codeDialog)"
+						oncomplete="PF('codeDialog').show();">
+						<f:setPropertyActionListener target="#{codeBB.currentBO}"
+							value="#{row}" />
+					</p:commandLink>
+					<h:outputText value=" | " />
+					<p:commandLink value="删除 " action="#{codeBB.delete}"
+						update="@widgetVar(dataTableCode)">
+						<f:setPropertyActionListener target="#{codeBB.currentBO}"
+							value="#{row}" />
+
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			<h:panelGroup>
+				<p:commandButton value="添加字段" action="#{codeBB.addDtl}"
+					update="dataTableCodeDtl,@widgetVar(growl)" process="dataTableCodeDtl,@this" />
+					
+				<p:commandButton value="转换sql字段" action="#{codeBB.changeDtlList}"
+					update="dataTableCodeDtl,@widgetVar(growl)"
+					process="dataTableCodeDtl,@this" />
+
+				<p:commandButton value="保存字段" action="#{codeBB.saveDtlList}"
+					update="dataTableCodeDtl,@widgetVar(growl)"
+					process="dataTableCodeDtl,@this" />
+
+				<p:commandButton value="生成代码" action="#{codeBB.codeBuild}"
+					update="codeBuildDialog,@widgetVar(growl)"
+					process="dataTableCodeDtl,codeBuildDialog,@this" 
+					oncomplete="PF('codeBuildDialog').show();"/>
+
+			</h:panelGroup>
+			<p:dataTable id="dataTableCodeDtl" widgetVar="dataTableCodeDtl"
+				var="row" resizableColumns="true" value="#{codeBB.dtlList}"
+				scrollable="false" scrollHeight="200" rowKey="#{row.id}"
+				rowIndexVar="idx">
+
+				<p:column headerText="#" style="width:30px">
+					<h:outputText value="#{idx+1}" />
+				</p:column>
+
+				<p:column headerText="序号" style="width:50px">
+					<h:inputText value="#{row.num}" />
+				</p:column>
+
+				<p:column headerText="描述">
+					<h:inputText value="#{row.memo}" />
+				</p:column>
+
+				<p:column headerText="属性名">
+					<h:inputText value="#{row.fieldName}" />
+				</p:column>
+				<p:column headerText="sql字段名">
+					<h:inputText value="#{row.sqlName}" />
+				</p:column>
+				<p:column headerText="类型">
+					<p:selectOneMenu value="#{row.fieldType}" style="width:100px">
+						<f:selectItem itemLabel="String" itemValue="String" />
+						<f:selectItem itemLabel="Integer" itemValue="Integer" />
+						<f:selectItem itemLabel="Date" itemValue="Date" />
+						<f:selectItem itemLabel="BigDecimal" itemValue="BigDecimal" />
+						<f:selectItem itemLabel="Boolean" itemValue="Boolean" />
+					</p:selectOneMenu>
+				</p:column>
+
+				<p:column headerText="长度" style="width:80px">
+					<h:inputText value="#{row.length}" />
+				</p:column>
+
+
+				<p:column headerText="是否可空" style="width:80px">
+					<p:selectOneMenu value="#{row.canNull}" style="width:100px">
+						<f:selectItem itemLabel="是" itemValue="1" />
+						<f:selectItem itemLabel="否" itemValue="0" />
+					</p:selectOneMenu>
+				</p:column>
+				<!-- 
+				<p:column headerText="默认值" style="width:80px">
+					<h:inputText value="#{row.defaultValue}" />
+				</p:column>
+				 -->
+
+				<p:column headerText="操作" styleClass="process-column">
+					<p:commandLink value="删除 " action="#{codeBB.deleteDtl}"
+						update="@widgetVar(dataTableCodeDtl)">
+						<f:setPropertyActionListener target="#{codeBB.dtlBO}"
+							value="#{row}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+
+
+			<p:dialog header="类编辑" draggable="true" id="codeDialog"
+				widgetVar="codeDialog" minimizable="false" maximizable="false"
+				resizable="false" modal="false">
+				<h:panelGrid columns="2" id="codeDialogPanel">
+					<h:outputText value="序号:"></h:outputText>
+					<p:inputText value="#{codeBB.currentBO.num}"></p:inputText>
+					<h:outputText value="类名:"></h:outputText>
+					<p:inputText value="#{codeBB.currentBO.className}"></p:inputText>
+					<h:outputText value="模块简拼:"></h:outputText>
+					<p:inputText value="#{codeBB.currentBO.mdName}"></p:inputText>
+					<h:outputText value="表名:"></h:outputText>
+					<h:panelGroup>
+					<p:inputText value="#{codeBB.currentBO.tableName}"></p:inputText>
+					<p:commandLink value="生成" action="#{codeBB.changeCodeToTable}" ajax="true"
+							process="codeDialogPanel"  update="codeDialogPanel" />
+					</h:panelGroup>
+					<h:outputText value="包路径:"></h:outputText>
+					<p:inputText value="#{codeBB.currentBO.bagName}"></p:inputText>
+					
+					<h:outputText value="说明:"></h:outputText>
+					<p:inputText value="#{codeBB.currentBO.memo}"></p:inputText>
+
+					<f:facet name="footer">
+						<p:commandButton value="保存" action="#{codeBB.save}" ajax="true"
+							process="codeDialogPanel"
+							update="codeDialogPanel,@widgetVar(growl),dataTableCode"
+							oncomplete="PF('codeDialog').hide();" />
+						<p:commandButton value="取消" onclick="PF('codeDialog').hide();" />
+					</f:facet>
+
+				</h:panelGrid>
+			</p:dialog>
+
+
+			<p:dialog header="生成编码" draggable="true" id="codeBuildDialog"
+				widgetVar="codeBuildDialog" minimizable="true" maximizable="true"
+				resizable="true" modal="false"
+				width="1200" height="500">
+	
+				<p:tabView>
+					<p:tab title="BO">
+						
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.boStr}" style="width:100%;height:400px" />
+                    	</pre>
+                   			 
+					</p:tab>
+					<p:tab title="VO">
+						<pre name="code" class="brush:java">
+						<h:inputTextarea value="#{codeBB.voStr}" style="width:100%;height:400px" />
+ 	
+                    	</pre>
+					</p:tab>
+					<p:tab title="IDAO">
+						 <pre name="code" class="brush:java">
+						 	<h:inputTextarea value="#{codeBB.idaoStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+					<p:tab title="DAOImpl">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.daoStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+					<p:tab title="IBS">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.ibsStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+					<p:tab title="BSImpl">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.bsStr}" style="width:100%;height:400px" />
+
+                    	</pre>
+					</p:tab>
+					<p:tab title="BB-bs">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.bbStr}" style="width:100%;height:400px" />
+ 							<h:outputText value="#{codeBB.bbStr}"></h:outputText>
+                    	</pre>
+					</p:tab>
+					<p:tab title="xhtml-pf">
+						<pre name="code" class="brush:xml">
+							<h:inputTextarea value="#{codeBB.pfStr}" style="width:100%;height:400px" />
+						</pre>
+					</p:tab>
+					<p:tab title="IUCC">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.iuccStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+					<p:tab title="UCCImpl">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.uccStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+					<p:tab title="BB-ucc">
+						<pre name="code" class="brush:java">
+							<h:inputTextarea value="#{codeBB.bbUccStr}" style="width:100%;height:400px" />
+                    	</pre>
+					</p:tab>
+				</p:tabView>
+
+			</p:dialog>
+
+		<script type="text/javascript">
+		function oCopy(obj){
+obj.select();
+js=obj.createTextRange();
+js.execCommand("Copy")
+alert("复制成功!");
+}
+
+function copyText(id) 
+{
+var obj=document.getElementById("bo");
+var rng = document.body.createTextRange();
+rng.moveToElementText(obj);
+rng.scrollIntoView();
+rng.select();
+rng.execCommand("Copy");
+rng.collapse(false);
+alert("复制成功!");
+}
+</script>
+		
+		</h:form>
+	</body>
+</f:view>
+</html>
+
